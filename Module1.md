@@ -7,20 +7,11 @@ In this module we will be installing, building and testing SpiderMonkey.
 Depending on your operating system there might be some differences. Please follow the link corresponding to your operating system.
 
 
-<a
-href="https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-linux">
-### Linux
-</a>
+### [Linux](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-linux)
 
-<a
-href="https://firefox-source-docs.mozilla.org/setup/windows_build.html#building-firefox-on-windows">
-### Windows
-</a>
+### [Windows](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-windows)
 
-<a
-href="https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-macos">
-### macOS
-</a>
+### [macOS](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-macos)
 
 # Initial playing
 
