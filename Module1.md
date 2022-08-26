@@ -4,60 +4,71 @@
 
 In this module we will be installing, building and testing SpiderMonkey.
 
-Depending on your operating system there might be some differences. Please follow the link corresponding to your operating systdsem.
+The exact steps in the installation process depend on the operating system. We refer the reader to specific instructions as follows:
 
+- [Building Mozilla Firefox on **Linux**](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-linux)
 
-### [Linux](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-linux)
+- [Building Mozilla Firefox on **Windows**](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-windows)
 
-### [Windows](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-windows)
-
-### [macOS](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-macos)
+- [Building Mozilla Firefox on **macOS**](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-macos)
 
 # Running SpiderMonkey
 
-Now you should have a folder named "mozilla_unified".
+After the installation process, a new folder `mozilla_unified` should appear in ... WHERE?
 
-As stated in the guide by Mozilla. Running the SpiderMonkey engine goes as follows. 
+In order to run the SpiderMonkey engine, use the following commands:
 
 ```
 $ ./mach build
 ```
+
+SHOW HERE SOME LAST LINES OF THE OUTPUT BY MACH
+
 ```
 $ ./mach run
 ```
 
-You can also run .js files in this manner. By supplying the file as a parameter in the run command. 
+SHOW HERE SOME LAST LINES OF THE OUTPUT BY MACH
 
-Doing this will make debugging and testing implementations easier in the future
+It is also possible to run `.js` files in this manner by providing a filename as a parameter in the run command.
 
-example.js:
+WRITE EXAMPLE SNIPPET HERE
+
+Doing this will make debugging and testing implementations easier in the future.
+
+
 ```JS
+// file: example.js
 console.log("Hello world!");
 ```
 ```
 $ ./mach run example.js -> Hello world!
 ```
 
-# Applying patch
+WHAT DOES HAPPEN HERE EXACTLY WITH THE HELLO WORLD OUTPUT?
 
-In order to continue with this project, we need to remove the existing implementation of Array.group. This can be done by applying the patch provided in this repository. 
+# Applying patches
 
-1. Download the project.diff file in this repository
-2. Place it in mozilla_unified folder
+In order to continue with this project, we need to remove the existing implementation of `Array.group`.
+This can be done by applying the patch provided in this repository. MENTION LINK OR SOMETHING
+
+1. Download the `project.diff` file in this repository
+2. Place it in the folder `mozilla_unified`
 3. Run comand:
     ```
     hg import project.diff
     ```
 
-Now Array.group and Array.groupToMap should be removed from your codebase. 
+Now `Array.group` and `Array.groupToMap` should be removed from your codebase. NOT EXACTLY THE CODEBASE THOUGH? MAYBE TRY TO BE MORE PRECISE
 
-# Performing changes
+# Performing simple changes
 
-In order to learn how SpiderMonkey works and how to make changes, trying is important. The tasks for this module will focus on making small changes to learn where and what is possible to do. 
+The tasks below introduce how to make small changes to the SpiderMonkey engine, and to learn what and where can be changed.
 
 ## Task 1
 
 Ola wants to change the way Arrays function. He has recently read "A hitchiker's guide to the galaxy" and he wants any use of the Array.at() function to return the number 42 every time. Because that is always the answer in his mind. 
+TRY TO REWRITE WITHOUT THE STORY ABOUT OLA ETC.
 
 Tip: Take a look in the builtin folder, located at 
 ```
