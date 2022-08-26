@@ -66,3 +66,10 @@ mozilla_unified/js/src/builtin
 
 ## Task 2
 
+Create your own function on one of the builtins of Javascript. 
+In this task you are given quite a lot of freedom. It doesn't really matter what you end up implementing, the important thing is how to hook self hosted code into the .cpp files. 
+
+A good tip for this task is to take a look at how ArrayAt is hooked in the Array.cpp file. 
+
+
+
