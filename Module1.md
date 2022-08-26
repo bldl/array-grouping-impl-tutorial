@@ -38,17 +38,31 @@ console.log("Hello world!");
 $ ./mach run example.js -> Hello world!
 ```
 
+# Applying patch
+
+In order to continue with this project, we need to remove the existing implementation of Array.group. This can be done by applying the patch provided in this repository. 
+
+1. Download the project.diff file in this repository
+2. Place it in mozilla_unified folder
+3. Run comand:
+    ```
+    hg import project.diff
+    ```
+
+Now Array.group and Array.groupToMap should be removed from your codebase. 
+
 # Performing changes
 
 In order to learn how SpiderMonkey works and how to make changes, trying is important. The tasks for this module will focus on making small changes to learn where and what is possible to do. 
 
 ## Task 1
 
-Ola wants to change the way Arrays function. He has recently read "A hitchiker's guide to the galaxy" and he wants any use of the get() function to return the number 42. 
+Ola wants to change the way Arrays function. He has recently read "A hitchiker's guide to the galaxy" and he wants any use of the Array.at() function to return the number 42 every time. Because that is always the answer in his mind. 
 
-Tip: Take a look at the Array.js file, located at 
+Tip: Take a look in the builtin folder, located at 
 ```
-mozilla_unified/js/src/builtin/Array.js
+mozilla_unified/js/src/builtin
 ```
 
+## Task 2
 
