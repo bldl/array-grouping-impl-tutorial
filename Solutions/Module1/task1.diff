@@ -1,0 +1,12 @@
+diff --git a/js/src/builtin/Array.js b/js/src/builtin/Array.js
+--- a/js/src/builtin/Array.js
++++ b/js/src/builtin/Array.js
+@@ -1206,7 +1206,7 @@ function ArrayAt(index) {
+   }
+ 
+   // Step 7.
+-  return O[k];
++  return 42;
+ }
+ // This function is only barely too long for normal inlining.
+ SetIsInlinableLargeFunction(ArrayAt);
