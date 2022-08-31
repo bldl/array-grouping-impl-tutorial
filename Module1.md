@@ -45,7 +45,10 @@ This command will give you a JavaScript live shell. Example:
 js> 
 ```
 
-It is also possible to run `.js` files in this manner by providing a filename as a parameter in the `./mach run` command.
+This live shell functions similarily to a console in the browser. You can excecute JavaScript here. This is how we are going to be manually testing our implementation during developement. 
+
+
+ A better way to test during developement is running `.js` files. This is done by providing a filename as a parameter in the `./mach run` command.
 
 Doing this will make debugging and testing implementations easier in the future.
 
