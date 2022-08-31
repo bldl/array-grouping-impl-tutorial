@@ -78,7 +78,7 @@ Tip: Remember to `console.log()` the output of the program
 In order to continue with this project, we need to remove the existing implementation of `Array.group`.
 This can be done by applying the patch provided in this repository. 
 
-[LINK GOES HERE TO FILE]
+[patch.diff](diff_files/project.diff)
 
 1. Download the `project.diff` file in this repository
 2. Place it in the folder `mozilla_unified`
