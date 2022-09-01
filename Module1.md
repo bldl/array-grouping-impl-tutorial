@@ -2,14 +2,17 @@
 
 Intro to module
 
-TBW: we are reimplementing an existing feature .........
+Wouldn't this be better on The intro module? Module 0 
+TBW: we are reimplementing an existing feature ......... 
 
 
 # Installation of Mozilla unified and other required tools
 
 In this module we will be installing, building and testing SpiderMonkey.
 
-The exact steps in the installation process depend on the operating system. We refer the reader to specific instructions as follows:
+The exact steps in the installation process depend on the operating system. Before starting the installation. It is recomended to open a termnial and navigating the prefered location for the `mozilla_unified` folder to be stored in the future. 
+
+We refer the reader to specific instructions as follows:
 
 - [Building Mozilla Firefox on **Linux**](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-linux)
 
@@ -19,15 +22,13 @@ The exact steps in the installation process depend on the operating system. We r
 
 # Running SpiderMonkey
 
-TBW: Navigate to the folder ........
-
 After the installation process, a new folder `mozilla_unified` should appear in the folder the terminal was in when you started the install guide above. 
 
 Navigate to `mozilla_unified`.
 
 In order to run the SpiderMonkey engine, use the following commands in the `mozilla_unified` folder:
 
-```
+```console
 $ ./mach build
 ```
 Executing this command will result in the following output:
@@ -42,7 +43,7 @@ To take your build for a test drive, run: |mach run|
 
 
 In order to run the finished build, the following command is used:
-```
+```console
 $ ./mach run
 ```
 After this, the terminal will enter the JavaScript Read-Eval-Print-Loop mode, whose functionality is similar to a browser's console, and where arbitrary JavaScript code can be executed.
@@ -73,22 +74,29 @@ Hello World!
 ```
 
 
-# Applying patches
+# Applying patch
 
-TBW: what a patch is?....
 
-In order to remove the existing implementation of the _Array Grouping_ feature (methods `Array.group`, `Array.groupToMap`  TODO: FIXME!),
-apply the patch [`patch.diff`](diff_files/patch.diff). TODO: rename
 
-1. Download the `patch.diff` file in this repository into the `mozilla_unified` folder.
+The imeplementation of _Array Grouping_ feature (methods `Array.group`, `Array.groupToMap`) already exists within the current nightly build of SpiderMonkey. The code this tutorial is implementing alread exists in the `mozilla_unified` folder you have. We can remove this using the version control software Mercurial. In this tutorial we will not be using Mercurial for anything other than to apply patches. 
+
+Mercurial has the usefull feature of letting the user output the difference between their codebase and the current "head". This feature will be usefull to us for removing the existing implementation, as well to import the solutions to tasks given in each module. 
+
+The patch used to remove _Array Grouping_ feature can be found here:
+[`patch_remove_Array-group.diff`](diff_files/patch_remove_Array-group.diff).
+
+How to apply the patch:
+
+1. Download the `patch_remove_Array-group.diff` file in this repository into the `mozilla_unified` folder.
 2. Run comand:
     ```
-    hg import patch.diff -m "Remove pre-existing implementation of Array Grouping"
+    hg import patch_remove_Array-group.diff -m "Remove pre-existing implementation of Array Grouping"
     ```
 
 At this point, `Array.group` and `Array.groupToMap` should be removed from SpiderMonkey in the `mozilla_unified` folder. 
 
-TBW: explain what and where we removed and not removed
+# How to make and import a general patch
+
 
 
 TBW: ... explain how to add general patches ... (also about uncommited changed)
@@ -119,6 +127,7 @@ An example of hooking JavaScript functions into c++ can be seen in `Array.cpp` a
 A good tip for this task is to take a look at how ArrayAt is hooked in the Array.cpp file. 
 
 
+# Searchfox
 
 
 # Possible changes might need to be done to this module. 
