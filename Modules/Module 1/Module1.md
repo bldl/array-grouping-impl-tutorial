@@ -207,9 +207,8 @@ The tasks below introduce how to make small changes to the SpiderMonkey engine, 
 
 ## Task 1
 
-TODO: avoid "you" etc.
 
-One of the simplest ways to change a built in JavaScript function would be to just change the return value of that function. In this task you should change the return value of the built in `Array.at` function to always return the number 42. 
+One of the simplest ways to change a built in JavaScript function would be to just change the return value of that function. In this task, change the return value of the built in `Array.at` function to always return the number 42. 
 
 Tip: Take a look in the builtin folder, located at 
 ```
@@ -218,9 +217,13 @@ mozilla_unified/js/src/builtin
 
 ## Task 2
 
-Create your own function on one of the builtins of JavaScript. 
-In this task you are given quite a lot of freedom. It is not relevant what you end up implementing, the important thing is how to hook self hosted code into the .cpp files.
+Create a function on one of the builtins of JavaScript. 
+It is irrelevant what this implementation ends up as, the important thing is how to hook self hosted code into the .cpp files.
 
-An example of hooking JavaScript functions into c++ can be seen in `Array.cpp` at line 4571. This then corresponds to the function on line 104 in `Array.cpp` 
+An example of hooking JavaScript functions into c++ can be seen in `Array.cpp` at line 4571. This then corresponds to the function on line 104 in `Array.cpp`
 
 A good tip for this task is to take a look at how ArrayAt is hooked in the Array.cpp file. 
+
+## Task 3
+
+
