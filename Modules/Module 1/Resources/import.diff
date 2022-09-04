@@ -1,0 +1,31 @@
+diff --git a/js/src/builtin/Array.cpp b/js/src/builtin/Array.cpp
+--- a/js/src/builtin/Array.cpp
++++ b/js/src/builtin/Array.cpp
+@@ -4611,6 +4611,7 @@ static const JSFunctionSpec array_method
+ 
+     /* Proposal */
+     JS_SELF_HOSTED_FN("at", "ArrayAt", 1, 0),
++    JS_SELF_HOSTED_FN("at", "importTest", 0, 0),
+     JS_SELF_HOSTED_FN("findLast", "ArrayFindLast", 1, 0),
+     JS_SELF_HOSTED_FN("findLastIndex", "ArrayFindLastIndex", 1, 0),
+ 
+diff --git a/js/src/builtin/Array.js b/js/src/builtin/Array.js
+--- a/js/src/builtin/Array.js
++++ b/js/src/builtin/Array.js
+@@ -1180,6 +1180,10 @@ function FlattenIntoArray(
+   return targetIndex;
+ }
+ 
++function importTest(){
++  return "Import was successfull! Congratulations! \n Now i think you need to remove me from your codebase :)";
++}
++
+ // https://github.com/tc39/proposal-relative-indexing-method
+ // Array.prototype.at ( index )
+ function ArrayAt(index) {
+@@ -1363,3 +1367,5 @@ function ArrayFindLastIndex(predicate /*
+   // Step 6.
+   return -1;
+ }
++
++

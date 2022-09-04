@@ -95,11 +95,110 @@ How to apply the patch:
 
 At this point, `Array.group` and `Array.groupToMap` should be removed from SpiderMonkey in the `mozilla_unified` folder. 
 
-# How to make and import a general patch
+# How to read a `.diff` file
+
+It will be provided a lot of `.diff` files as "Solutions" for each of the tasks given at the bottom of a module. These can be quite tricky to read, that is what this part of the module will focus on. 
+
+The file `example.diff` file used for this example can be found in [](Resources/example.diff)
+
+Contents of `example.diff`:
+```console
+diff --git a/js/src/builtin/Array.js b/js/src/builtin/Array.js
+--- a/js/src/builtin/Array.js
++++ b/js/src/builtin/Array.js
+@@ -5,7 +5,9 @@
+ /* ES5 15.4.4.16. */
+ function ArrayEvery(callbackfn /*, thisArg*/) {
+   /* Step 1. */
+-  var O = ToObject(this);
++
++
++  //This is a test comment
+ 
+   /* Steps 2-3. */
+   var len = ToLength(O.length);
+```
+
+On line 1: 
+```console
+diff --git a/js/src/builtin/Array.js b/js/src/builtin/Array.js
+```
+The specific file in which the change has been made is located. The "head" of the folder structure is the `mozilla_unified` folder. 
+
+On lines 2 - 3:
+```console
+--- a/js/src/builtin/Array.js
++++ b/js/src/builtin/Array.js
+```
+This indicated that there has been both addition/s and deletion/s to the file `Array.js`
+
+On lines 4 - 14:
+```console
+@@ -5,7 +5,9 @@
+ /* ES5 15.4.4.16. */
+ function ArrayEvery(callbackfn /*, thisArg*/) {
+   /* Step 1. */
+-  var O = ToObject(this);
++
++
++  //This is a test comment
+ 
+   /* Steps 2-3. */
+   var len = ToLength(O.length);
+```
+This is the part of the file `Array.js` where the change was made. 
+
+Line 8 is where there has been a deletion, indicated by the `-` symbol at the beginning of the line. 
+
+Lines 9 - 11 is where these has been additions, indicated by the `+` symbol at the beginning of the lines. 
+
+All the rest are so the change is easier to locate within the codebase. 
 
 
+# `OPTIONAL:` How to make and import a patch/`.diff` file 
 
-TBW: ... explain how to add general patches ... (also about uncommited changed)
+### `NB! This still needs work, to ensure that if changes are made to mozilla central, it doesn't break this method of importing .diff files. Further testing is needed.`
+
+After understanding how to read `.diff` files, it might be purposefull to import them and test them by hand, in order to understand the assignement better. 
+
+The command `hg diff` will show the difference between the local version of SpiderMonkey and the previously committed version. We can use this command to output our current "change" and save it. This is what is refered to as a "patch" further in this tutorial. 
+
+Patches are used in this tutorial to test the solutions provided in `Solutions` of each module. To run one of the solutions provided, the current version of our implementation has to be output to a `.diff` file (So it is not lost). After the current implementation is saved, import the specified solutions `.diff` file. After the behaviour of the solution has been tested. We can import the file we output before. 
+
+Step by step explanation of this process:
+
+1. Run command:
+    ```console
+    hg diff > my_version.diff
+    ```
+    - This will output the current difference between the last commit and the local files and place it into the file `my_version.diff`
+2. Then we need to refresh our files, this can be done by:
+    1. Clear workspace to the up-to date one from mozilla: (WARNING: this will delete your changes if you did not save them in a patch on step 1!):
+        ```console
+        hg up central -C
+        ```
+    2. Remove _Array Grouping_ proposal ():
+        ```console
+        hg import patch_remove_Array-group.diff -m "Remove pre-existing implementation of Array Grouping"
+        ```
+        This is done to ensure we are on a similar looking version and don't need to include the removal of _Array Grouping_ in all the `.diff` files provided. 
+3. Import the solution files 
+    ```console
+    hg import x.diff
+    ```
+
+Test the imported Solution/code provided in the `.diff` file. 
+
+## Import your implementation back:
+
+To get the current implementation back, just do the same method provided above, except skip step 1. 
+
+We don't need to perform step 1 because we already have the patch we just imported saved. 
+
+# Tasks connected to importing patches
+
+## Importing a simple patch
+In this task, you are to use the guide provided above to import the file [`import.diff`](Resources/)
 
 
 # Performing simple changes
@@ -125,15 +224,3 @@ In this task you are given quite a lot of freedom. It is not relevant what you e
 An example of hooking JavaScript functions into c++ can be seen in `Array.cpp` at line 4571. This then corresponds to the function on line 104 in `Array.cpp` 
 
 A good tip for this task is to take a look at how ArrayAt is hooked in the Array.cpp file. 
-
-
-# Searchfox
-
-
-# Possible changes might need to be done to this module. 
-
-1. Should we add Searchfox as part of Module 1? Or perhaps that should be Module 2? I really want to make tasks relevant to searcfox just so the user understands what a powerful tool it is. 
-MIKBAR: YES.
-
-2. More tasks? Or is it enough with all the installation and building SM for the first time? 
-
