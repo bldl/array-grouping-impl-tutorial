@@ -157,7 +157,7 @@ All the rest are so the change is easier to locate within the codebase.
 
 # `OPTIONAL:` How to make and import a patch/`.diff` file 
 
-### `NB! This still needs work, to ensure that if changes are made to mozilla central, it doesn't break this method of importing .diff files. Further testing is needed.`
+## `NB! This still needs work, to ensure that if changes are made to mozilla central, it doesn't break this method of importing .diff files. Further testing is needed. And i need to learn Mercurial better. Feel free to try it out Daniel` 
 
 After understanding how to read `.diff` files, it might be purposefull to import them and test them by hand, in order to understand the assignement better. 
 
@@ -171,7 +171,7 @@ Step by step explanation of this process:
     ```console
     hg diff > my_version.diff
     ```
-    - This will output the current difference between the last commit and the local files and place it into the file `my_version.diff`
+    - This will output the current difference between the last commit and the local files and place it into the file `my_version.diff`. Which will be located in `mozilla_unified`
 2. Then we need to refresh our files, this can be done by:
     1. Clear workspace to the up-to date one from mozilla: (WARNING: this will delete your changes if you did not save them in a patch on step 1!):
         ```console
@@ -179,12 +179,12 @@ Step by step explanation of this process:
         ```
     2. Remove _Array Grouping_ proposal ():
         ```console
-        hg import patch_remove_Array-group.diff -m "Remove pre-existing implementation of Array Grouping"
+        hg import path_to_file.diff -m "Remove pre-existing implementation of Array Grouping"
         ```
         This is done to ensure we are on a similar looking version and don't need to include the removal of _Array Grouping_ in all the `.diff` files provided. 
 3. Import the solution files 
     ```console
-    hg import x.diff
+    hg import path_to_file.diff
     ```
 
 Test the imported Solution/code provided in the `.diff` file. 
@@ -193,11 +193,11 @@ Test the imported Solution/code provided in the `.diff` file.
 
 To get the current implementation back, just do the same method provided above, except skip step 1. 
 
-We don't need to perform step 1 because we already have the patch we just imported saved. 
+Step 1 is not needed because the patch we just imported is saved already. 
 
-# Tasks connected to importing patches
+## Tasks
 
-## Importing a simple patch
+### **Task 1.1:** Importing a simple patch
 In this task, you are to use the guide provided above to import the file [`import.diff`](Resources/)
 
 
@@ -205,8 +205,9 @@ In this task, you are to use the guide provided above to import the file [`impor
 
 The tasks below introduce how to make small changes to the SpiderMonkey engine, and to learn what and where can be changed.
 
-## Task 1
+## Tasks
 
+### **Task 2.1** The answer is always 42
 
 One of the simplest ways to change a built in JavaScript function would be to just change the return value of that function. In this task, change the return value of the built in `Array.at` function to always return the number 42. 
 
@@ -215,7 +216,14 @@ Tip: Take a look in the builtin folder, located at
 mozilla_unified/js/src/builtin
 ```
 
-## Task 2
+### **Task 2.2:** Crazy functionality
+
+Change the functionality of a random builtin Object in JavaScript. We are mostly familiar with `Array.js`. However, it is highly recommended to see how the other JavaScript Objects are built. 
+
+Remember to test your implementation by building the engine!
+
+
+### **Task 2.3:** Your own function
 
 Create a function on one of the builtins of JavaScript. 
 It is irrelevant what this implementation ends up as, the important thing is how to hook self hosted code into the .cpp files.
@@ -224,6 +232,6 @@ An example of hooking JavaScript functions into c++ can be seen in `Array.cpp` a
 
 A good tip for this task is to take a look at how ArrayAt is hooked in the Array.cpp file. 
 
-## Task 3
+
 
 
