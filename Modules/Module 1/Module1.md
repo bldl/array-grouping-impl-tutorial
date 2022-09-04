@@ -157,7 +157,7 @@ All the rest are so the change is easier to locate within the codebase.
 
 # `OPTIONAL:` How to make and import a patch/`.diff` file 
 
-## `NB! This still needs work, to ensure that if changes are made to mozilla central, it doesn't break this method of importing .diff files. Further testing is needed. And i need to learn Mercurial better. Feel free to try it out Daniel` 
+## `NB! This still needs work, to ensure that if changes are made to mozilla central, it doesn't break this method of importing .diff files. Further testing is needed. And i need to learn Mercurial better. Feel free to try it out Daniel`
 
 After understanding how to read `.diff` files, it might be purposefull to import them and test them by hand, in order to understand the assignement better. 
 
