@@ -190,9 +190,10 @@ Step by step explanation of this process:
     ```console
     hg import path_to_file.diff --no-commit
     ```
+    It is important to remember the flag `--no-commit`. This is to ensure we are able to remove the patch in the next step of the tutorial. 
      
 
-Test the imported Solution/code provided in the `.diff` file. 
+Test the imported Solution/code provided in the `.diff` file. This is useful to compare the behaviour of the solution against our implementation. 
 
 ## Import your implementation back:
 
