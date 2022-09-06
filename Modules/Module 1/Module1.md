@@ -20,6 +20,11 @@ We refer the reader to specific instructions as follows:
 
 - [Building Mozilla Firefox on **macOS**](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-macos)
 
+The installation will ask what version of Firefox we wish to be building as standard. In this tutorial we will use choice `5: SpiderMonkey JavaScript engine`
+
+It is not needed to configure Mercurial (hg) to commit to mozilla. During installation answer no (n) to this configuration. 
+
+
 # Running SpiderMonkey
 
 After the installation process, a new folder `mozilla_unified` should appear in the folder the terminal was in when you started the install guide above. 
@@ -83,7 +88,7 @@ The imeplementation of _Array Grouping_ feature (methods `Array.group`, `Array.g
 Mercurial has the usefull feature of letting the user output the difference between their codebase and the current "head". This feature will be usefull to us for removing the existing implementation, as well to import the solutions to tasks given in each module. 
 
 The patch used to remove _Array Grouping_ feature can be found here:
-[`patch_remove_Array-group.diff`](diff_files/patch_remove_Array-group.diff).
+[`patch_remove_Array-group.diff`](../../diff_files/patch_remove_Array-group.diff).
 
 How to apply the patch:
 
@@ -161,7 +166,11 @@ All the rest are so the change is easier to locate within the codebase.
 
 After understanding how to read `.diff` files, it might be purposefull to import them and test them by hand, in order to understand the assignement better. 
 
-The command `hg diff` will show the difference between the local version of SpiderMonkey and the previously committed version. We can use this command to output our current "change" and save it. This is what is refered to as a "patch" further in this tutorial. 
+The command `hg diff` will show the difference between the local version of SpiderMonkey and the previously committed version.
+
+Test this by making some simple change to `ReadMe.md`. Remember to save the document, then run `hg diff`. 
+
+ We can use this command to output our current "change" and save it. This is what is refered to as a "patch" further in this tutorial. 
 
 Patches are used in this tutorial to test the solutions provided in `Solutions` of each module. To run one of the solutions provided, the current version of our implementation has to be output to a `.diff` file (So it is not lost). After the current implementation is saved, import the specified solutions `.diff` file. After the behaviour of the solution has been tested. We can import the file we output before. 
 
@@ -177,15 +186,11 @@ Step by step explanation of this process:
         ```console
         hg up central -C
         ```
-    2. Remove _Array Grouping_ proposal ():
-        ```console
-        hg import path_to_file.diff -m "Remove pre-existing implementation of Array Grouping"
-        ```
-        This is done to ensure we are on a similar looking version and don't need to include the removal of _Array Grouping_ in all the `.diff` files provided. 
 3. Import the solution files 
     ```console
-    hg import path_to_file.diff
+    hg import path_to_file.diff --no-commit
     ```
+     
 
 Test the imported Solution/code provided in the `.diff` file. 
 
@@ -199,6 +204,8 @@ Step 1 is not needed because the patch we just imported is saved already.
 
 ### **Task 1.1:** Importing a simple patch
 In this task, you are to use the guide provided above to import the file [`import.diff`](Resources/)
+
+Remember to discard the patch afterwards.
 
 
 # Performing simple changes
@@ -231,10 +238,5 @@ It is irrelevant what this implementation ends up as, the important thing is how
 An example of hooking JavaScript functions into c++ can be seen in `Array.cpp` at line 4571. This then corresponds to the function on line 104 in `Array.cpp`
 
 A good tip for this task is to take a look at how ArrayAt is hooked in the Array.cpp file. 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> e31b3b1ffdbabe060b16dfb69c81b3ed8de1016d
 
 
