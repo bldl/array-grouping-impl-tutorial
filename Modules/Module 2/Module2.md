@@ -15,14 +15,31 @@ A fun place to view the differences between the engine is:
 
 In this tutoarial we will be using this specification to write the implementation of _Array Grouping_. 
 
-
-
 # The specification:
 
 The full specification can be viewed [here](./Resources/Specification_Array_Grouping.md)
 
 
 # The specification of _Array Grouping_
+
+TODO: Explain specification
+
+Line for Line?
+
+Just an intro to how to read the spec? Sort of like:
+
+EcmaScript is a Pseudocode specification. So reading it is quite like reading code. You can assume the keywords like for, while, get() and lists function the same as in any other language. The big difference here is the built in Ecma functions. Things like: 
+
+```
+2. Let len be ? LengthOfArrayLike(O).
+```
+
+In this line of the specification we define a variable len. This variable len gets assigned the result fo the built in EcmaScript function LengthOfArrayLike(O). Where O is the Object (read Array) we are grouping. 
+
+## Task:
+
+Find out what the ? in this line means. Then explain with your own words, what and why it is needed. 
+
 
 
 
