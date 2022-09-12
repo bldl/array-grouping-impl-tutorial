@@ -3,6 +3,17 @@
 The focus of this module is to learn EcmaScript. How to read the specification of JavaScript
 
 
+# What is EcmaScript
+
+JavaScript is not as much a programming language as it is the implementation of the programming language called EcmaScript. EcmaScript is a general purpose programming language defined by the Ecma-262 Language specification. 
+
+In this tutoarial we will be using this specification to write the implementation of _Array Grouping_. 
+
+# The specification:
+
+The full specification can be viewed [here](./Resources/Specification_Array_Grouping.md)
+
+
 # The specification of _Array Grouping_
 
 Explanation of Array Grouping
