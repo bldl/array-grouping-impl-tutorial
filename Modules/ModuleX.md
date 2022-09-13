@@ -1,13 +1,13 @@
-# Module X: Headline
+# X.0 Headline
 
 Intro to module
 
 
-# Headline of sub-article
+# X.1 Headline of sub-article
 
 Explanation of sub-article
 
-## Task X
+## Task X.1
 
 
 Do some task

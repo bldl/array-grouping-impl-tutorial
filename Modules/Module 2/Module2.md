@@ -1,9 +1,9 @@
-# Module X: Introduction to EcmaScript!
+# 2.0 Introduction to EcmaScript!
 
-The focus of this module is to learn EcmaScript. How to read the specification of JavaScript
+The focus of this module is learn how to read EcmaScript, the specification of JavaScript. 
 
 
-# What is EcmaScript
+# 2.1 What is EcmaScript
 
 JavaScript is not as much a programming language as it is the implementation of the programming language called EcmaScript. EcmaScript is a general purpose programming language defined by the Ecma-262 Language specification. 
 
@@ -15,42 +15,66 @@ A fun place to view the differences between the engine is:
 
 In this tutoarial we will be using this specification to write the implementation of _Array Grouping_. 
 
-# The specification:
+# 2.2 The specification of _Array Grouping_:
 
-The full specification can be viewed [here](./Resources/Specification_Array_Grouping.md)
+The full specification of _Array Grouping_ can be viewed [here](./Resources/Specification_Array_Grouping.md)
 
-
-# The specification of _Array Grouping_
-
-TODO: Explain specification
-
-Line for Line?
-
-Just an intro to how to read the spec? Sort of like:
+In this tutorial we will be working with an older version of the specification. The official one can be found [here](https://tc39.es/proposal-array-grouping/). The reason for this is it cannot be known whether changes will be made to the specification by the comitte. This makes keeping the tutorial up to date difficult if we used the official version.
 
 EcmaScript is a Pseudocode specification. So reading it is quite like reading code. You can assume the keywords like for, while, get() and lists function the same as in any other language. The big difference here is the built in Ecma functions. Things like: 
 
 ```
-2. Let len be ? LengthOfArrayLike(O).
+1. Let len be ? LengthOfArrayLike(O).
 ```
 
 In this line of the specification we define a variable len. This variable len gets assigned the result fo the built in EcmaScript function LengthOfArrayLike(O). Where O is the Object (read Array) we are grouping. 
+Each built in EcmaScript function can be viewed by clicking it's corresponding link. 
 
-## Task:
+Everything written in the specification has a definition also written somewhere in the specification. In order to understand the specification, it is needed to look at the definitions of each of the used EcmaScript functions. Some of them are quite trivial, and can be explained solely by their names. However others, like `ToPropertyKey()` can be quite difficult to understand. This is when reading the functions definition is purposeful. 
+
+Some functions and parts of the specification are quite difficult to understand, even after having viewed their definition in the specification. This is where the method of looking at pre-existing code comes in. This can be done by using the powerful tool `SearchFox`
+
+## Tasks 2.2:
+
+### What does ? mean:
 
 Find out what the ? in this line means. Then explain with your own words, what and why it is needed. 
 
+### Definitions of functions:
+
+Find the definiton (explanation) of the function `IsCallable()`. 
+
+NB! It is not required to understand the definition(explanation) of the function. The purpose of this task is to learn how to navigate the EcmaScript specification. 
+
+# 2.3 Searchfox
+
+Searchfox is an incredibly powerful tool to search the codebase of `mozilla_central`. It enables the developer to look through the existing codebase much easier than diggin through files. This allows for fast location of code that might solve the same problem. 
+
+## [Searchfox](https://searchfox.org)
+
+When viewing the specification, parts can be quite technical, and not entirely clear what the functionality is. 
+
+## TODO: Write the explanation of why and how so find examples of implementations in the spec
+
+## Tasks 2.4:
+
+### Find the implementation:
+
+In the task "Definition of functions" you where supposed to find the definition of it in EcmaScript. 
+Now find out what the implementation of the EcmaScript function `IsCallable()` is called in SpiderMonkey
 
 
+# MAIN TASK
 
-# Searchfox
+After this module, the implementation will start. It is strongly recommended to understand each part of the specification by this time. Therefore to get a deeper understanding, go through each line in the specification of `Array.prototye.GroupBy`, and write a short paragraph about how this line should function in the implementation. The length of each paragraph should be related to the complexity of the line. 
 
-Searchfox is an incredibly strong tool to search the codebase of `mozilla_central`. It enables the developer to look through the existing codebase much easier than diggin through files. This allows for fast location of code that might solve the same problem. 
+Example:
 
-In this tutorial we will not be specifically describing the usage of Searchfox. The tool is just there if one get's stuck. 
+```
+4. Let k be 0.
+```
+Line 4: Set the variable k to contain the value 0.
 
-[Searchfox](https://searchfox.org)
+Solution to this task can be found [here](Solution\Main_TASK_Mod2.md) (NO PEEKING!)
 
-## Task SearchFox
 
-Find some part of the codebase! 
