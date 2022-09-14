@@ -1,0 +1,1 @@
+The EcmaScript function IsCallable has the same name within the SpiderMonkey engine. Namely IsCallable. 
