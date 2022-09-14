@@ -100,7 +100,7 @@ How to apply the patch:
 
 At this point, `Array.group` and `Array.groupToMap` should be removed from SpiderMonkey in the `mozilla_unified` folder. 
 
-# How to read a `.diff` file
+# How to read a `.diff` file created by Mercurial
 
 It will be provided a lot of `.diff` files as "Solutions" for each of the tasks given at the bottom of a module. These can be quite tricky to read, that is what this part of the module will focus on. 
 
@@ -159,47 +159,6 @@ Lines 9 - 11 is where these has been additions, indicated by the `+` symbol at t
 
 All the rest are so the change is easier to locate within the codebase. 
 
-
-# `OPTIONAL:` How to make and import a patch/`.diff` file 
-
-## `NB! This still needs work, to ensure that if changes are made to mozilla central, it doesn't break this method of importing .diff files. Further testing is needed. And i need to learn Mercurial better. Feel free to try it out Daniel`
-
-After understanding how to read `.diff` files, it might be purposefull to import them and test them by hand, in order to understand the assignement better. 
-
-The command `hg diff` will show the difference between the local version of SpiderMonkey and the previously committed version.
-
-Test this by making some simple change to `ReadMe.md`. Remember to save the document, then run `hg diff`. 
-
- We can use this command to output our current "change" and save it. This is what is refered to as a "patch" further in this tutorial. 
-
-Patches are used in this tutorial to test the solutions provided in `Solutions` of each module. To run one of the solutions provided, the current version of our implementation has to be output to a `.diff` file (So it is not lost). After the current implementation is saved, import the specified solutions `.diff` file. After the behaviour of the solution has been tested. We can import the file we output before. 
-
-Step by step explanation of this process:
-
-1. Run command:
-    ```console
-    hg diff > my_version.diff
-    ```
-    - This will output the current difference between the last commit and the local files and place it into the file `my_version.diff`. Which will be located in `mozilla_unified`
-2. Then we need to refresh our files, this can be done by:
-    1. Clear workspace to the up-to date one from mozilla: (WARNING: this will delete your changes if you did not save them in a patch on step 1!):
-        ```console
-        hg up central -C
-        ```
-3. Import the solution files 
-    ```console
-    hg import path_to_file.diff --no-commit
-    ```
-    It is important to remember the flag `--no-commit`. This is to ensure we are able to remove the patch in the next step of the tutorial. 
-     
-
-Test the imported Solution/code provided in the `.diff` file. This is useful to compare the behaviour of the solution against our implementation. 
-
-## Import your implementation back:
-
-To get the current implementation back, just do the same method provided above, except skip step 1. 
-
-Step 1 is not needed because the patch we just imported is saved already. 
 
 ## Tasks
 
