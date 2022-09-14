@@ -52,9 +52,9 @@ Searchfox is an incredibly powerful tool to search the codebase of `mozilla_cent
 
 ## [Searchfox](https://searchfox.org)
 
-When viewing the specification, parts can be quite technical, and not entirely clear what the functionality is. 
+When viewing the specification, parts can be quite technical, and not entirely clear what the functionality is, or how one is supposed to implement said functionality in SpiderMonkey. 
 
-## TODO: Write the explanation of why and how so find examples of implementations in the spec
+Searchfox can be used for this. If there is some line of the specification that is inclear, or difficult to understand. Find a similar or exactly the same line in a previous function implemented in EcmaScript. The source code of this function can then be viewed in Searchfox by searching for the function!
 
 ## Tasks 2.4:
 
@@ -65,6 +65,8 @@ Now find out what the implementation of the EcmaScript function `IsCallable()` i
 
 
 # MAIN TASK
+
+## Part 1
 
 After this module, the implementation will start. It is strongly recommended to understand each part of the specification by this time. Therefore to get a deeper understanding, go through each line in the specification of `Array.prototye.GroupBy`, and write a short paragraph about how this line should function in the implementation. The length of each paragraph should be related to the complexity of the line. 
 
@@ -78,3 +80,9 @@ Line 4: Set the variable k to contain the value 0.
 Solution to this task can be found [here](Solution\Main_TASK_Mod2.md) (NO PEEKING!)
 
 
+## Part 2
+
+Find the differences between the function `groupBy` and the function `groupByToMap`. 
+
+Why do we need two, so similar functions?
+Why are the differences there in the first place?
