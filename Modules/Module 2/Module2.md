@@ -9,9 +9,7 @@ JavaScript is not as much a programming language as it is the implementation of 
 
 There exists a JavaScript engine in all major browsers used today. All these engines are implemented differently, with different strengths and weaknesses when it comes extending them. One thing is for certain, EcmaScript is there to ensure they function equally to the end-developer. Any JavaScript ran in one engine should produce the exact same output in another. 
 
-A fun place to view the differences between the engine is:
-
-[Test262 Report](https://test262.report/)
+A fun place to view the differences between the engine is: [Test262 Report](https://test262.report/)
 
 In this tutoarial we will be using this specification to write the implementation of _Array Grouping_. 
 
@@ -21,16 +19,17 @@ The full specification of _Array Grouping_ can be viewed [here](./Resources/Spec
 
 In this tutorial we will be working with an older version of the specification. The official one can be found [here](https://tc39.es/proposal-array-grouping/). The reason for this is it cannot be known whether changes will be made to the specification by the comitte. This makes keeping the tutorial up to date difficult if we used the official version.
 
-EcmaScript is a Pseudocode specification. So reading it is quite like reading code. You can assume the keywords like for, while, get() and lists function the same as in any other language. The big difference here is the built in Ecma functions. Things like: 
+EcmaScript is a Pseudocode specification. So reading it is quite like reading code. You can assume the keywords like for, while, get() and lists function the same as in any other language. The big difference here is the built in Ecma functions, like: 
 
 ```
 1. Let len be ? LengthOfArrayLike(O).
 ```
 
-In this line of the specification we define a variable len. This variable len gets assigned the result fo the built in EcmaScript function LengthOfArrayLike(O). Where O is the Object (read Array) we are grouping. 
+In this line of the specification we define a variable len. This variable len gets assigned the result from the built in EcmaScript function `LengthOfArrayLike`.It is passed one argument, O, where O is the Object (read arraylike) we are grouping. 
+
 Each built in EcmaScript function can be viewed by clicking it's corresponding link. 
 
-Everything written in the specification has a definition also written somewhere in the specification. In order to understand the specification, it is needed to look at the definitions of each of the used EcmaScript functions. Some of them are quite trivial, and can be explained solely by their names. However others, like `ToPropertyKey()` can be quite difficult to understand. This is when reading the functions definition is purposeful. 
+Everything written in the specification has a definition also written somewhere in the specification. In order to understand the specification for a given proposal, it is needed to look at the definitions of each of the used EcmaScript functions. Some of them are quite trivial, and can be explained solely by their names. However others, like `ToPropertyKey()` can be quite difficult to understand. This is when reading the functions definition is purposeful. 
 
 Some functions and parts of the specification are quite difficult to understand, even after having viewed their definition in the specification. This is where the method of looking at pre-existing code comes in. This can be done by using the powerful tool `SearchFox`
 
@@ -54,15 +53,20 @@ Searchfox is an incredibly powerful tool to search the codebase of `mozilla_cent
 
 When viewing the specification, parts can be quite technical, and not entirely clear what the functionality is, or how one is supposed to implement said functionality in SpiderMonkey. 
 
-Searchfox can be used for this. If there is some line of the specification that is inclear, or difficult to understand. Find a similar or exactly the same line in a previous function implemented in EcmaScript. The source code of this function can then be viewed in Searchfox by searching for the function!
+Searchfox is used for this. If there is some line of the specification that is unclear, or difficult to understand. Find a similar, or exactly the same line in a previous function implemented. The source code of this function can then be viewed in Searchfox by searching for the function!
+
+There is usually parts of the specification that are quite similar when they are related to the same JavaScript builtin. It is therefore quite clever to start looking for a similar implementation on the same Object. In the case of _Array Grouping_, a similar function is `Array.prototype.filter`
+
+Viewing the codebase of SpiderMonkey this way is a lot more efficient than using built in IDE search methods, as all the functions of SpiderMonkey are indexed and searchable in Searchfox. 
 
 ## Tasks 2.4:
 
 ### Find the implementation:
 
-In the task "Definition of functions" you where supposed to find the definition of it in EcmaScript. 
-Now find out what the implementation of the EcmaScript function `IsCallable()` is called in SpiderMonkey
+In the task "Definition of functions" you where supposed to find the definition of `IsCallable` in EcmaScript. 
+Now find out what the implementation of the EcmaScript function `isCallable` is called in SpiderMonkey
 
+TIP: Use Searchfox!
 
 # MAIN TASK
 
