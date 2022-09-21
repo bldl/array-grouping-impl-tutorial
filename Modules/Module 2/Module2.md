@@ -15,7 +15,7 @@ In this tutoarial we will be using this specification to write the implementatio
 
 # 2.2 The specification of _Array Grouping_:
 
-The full specification of _Array Grouping_ can be viewed [here](./Resources/Specification_Array_Grouping.md)
+The full specification of _Array Grouping_ can be viewed [here](/Specification/Specification_Array_Grouping.md)
 
 In this tutorial we will be working with an older version of the specification. The official one can be found [here](https://tc39.es/proposal-array-grouping/). The reason for this is it cannot be known whether changes will be made to the specification by the comitte. This makes keeping the tutorial up to date difficult if we used the official version.
 
@@ -35,7 +35,7 @@ Some functions and parts of the specification are quite difficult to understand,
 
 ## Tasks 2.2:
 
-### What does ? mean:
+### **2.2.1** What does ? mean:
 
 Find out what the ? in this line means. Then explain with your own words, what and why it is needed. 
 
@@ -61,16 +61,16 @@ Viewing the codebase of SpiderMonkey this way is a lot more efficient than using
 
 ## Tasks 2.4:
 
-### Find the implementation:
+### **2.4.1** Find the implementation:
 
 In the task "Definition of functions" you where supposed to find the definition of `IsCallable` in EcmaScript. 
 Now find out what the implementation of the EcmaScript function `isCallable` is called in SpiderMonkey
 
 TIP: Use Searchfox!
 
-# MAIN TASK
+# **2.5** MAIN TASK
 
-## Part 1
+## **2.5.1**
 
 After this module, the implementation will start. It is strongly recommended to understand each part of the specification by this time. Therefore to get a deeper understanding, go through each line in the specification of `Array.prototye.GroupBy`, and write a short paragraph about how this line should function in the implementation. The length of each paragraph should be related to the complexity of the line. 
 
@@ -81,10 +81,10 @@ Example:
 ```
 Line 4: Set the variable k to contain the value 0.
 
-Solution to this task can be found [here](Solution\Main_TASK_Mod2.md) (NO PEEKING!)
+Solution to this task can be found [here](Solution\Main_TASK_Mod2.md) 
 
 
-## Part 2
+## **2.5.2**
 
 Find the differences between the function `groupBy` and the function `groupByToMap`. 
 

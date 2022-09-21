@@ -1,4 +1,4 @@
-# Module 1: Onboarding and Getting to Know the Tools
+# **1.0** Onboarding and Getting to Know the Tools
 
 Intro to module
 
@@ -6,7 +6,7 @@ Wouldn't this be better on The intro module? Module 0
 TBW: we are reimplementing an existing feature ......... 
 
 
-# Installation of Mozilla unified and other required tools
+# **1.1** Installation of Mozilla unified and other required tools
 
 In this module we will be installing, building and testing SpiderMonkey.
 
@@ -25,7 +25,7 @@ The installation will ask what version of Firefox we wish to be building as stan
 It is not needed to configure Mercurial (hg) to commit to mozilla. During installation answer no (n) to this configuration. 
 
 
-# Running SpiderMonkey
+# **1.2** Running SpiderMonkey
 
 After the installation process, a new folder `mozilla_unified` should appear in the folder the terminal was in when you started the install guide above. 
 
@@ -79,7 +79,7 @@ Hello World!
 ```
 
 
-# Applying patch
+# **1.3** Applying patch
 
 
 
@@ -100,7 +100,7 @@ How to apply the patch:
 
 At this point, `Array.group` and `Array.groupToMap` should be removed from SpiderMonkey in the `mozilla_unified` folder. 
 
-# How to read a `.diff` file created by Mercurial
+# **1.4** How to read a `.diff` file created by Mercurial
 
 It will be provided a lot of `.diff` files as "Solutions" for each of the tasks given at the bottom of a module. These can be quite tricky to read, that is what this part of the module will focus on. 
 
@@ -159,22 +159,20 @@ Lines 9 - 11 is where these has been additions, indicated by the `+` symbol at t
 
 All the rest are so the change is easier to locate within the codebase. 
 
-
-## Tasks
-
-### **Task 1.1:** Importing a simple patch
+## **Tasks 1.4**
+### **1.4.1** Importing a simple patch
 In this task, you are to use the guide provided above to import the file [`import.diff`](Resources/)
 
 Remember to discard the patch afterwards.
 
 
-# Performing simple changes
+# **1.5** Performing simple changes
 
 The tasks below introduce how to make small changes to the SpiderMonkey engine, and to learn what and where can be changed.
 
-## Tasks
+## **Tasks 1.5**
 
-### **Task 2.1** The answer is always 42
+### **1.5.1** The answer is always 42
 
 One of the simplest ways to change a built in JavaScript function would be to just change the return value of that function. In this task, change the return value of the built in `Array.at` function to always return the number 42. 
 
@@ -183,14 +181,14 @@ Tip: Take a look in the builtin folder, located at
 mozilla_unified/js/src/builtin
 ```
 
-### **Task 2.2:** Crazy functionality
+### **1.5.2** Crazy functionality
 
 Change the functionality of a random builtin Object in JavaScript. We are mostly familiar with `Array.js`. However, it is highly recommended to see how the other JavaScript Objects are built. 
 
 Remember to test your implementation by building the engine!
 
 
-### **Task 2.3:** Your own function
+### **1.5.3** Your own function
 
 Create a function on one of the builtins of JavaScript. 
 It is irrelevant what this implementation ends up as, the important thing is how to hook self hosted code into the .cpp files.
