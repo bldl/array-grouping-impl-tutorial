@@ -6,4 +6,4 @@ The ? means essentially the same as:
 
 A completion record is explained [here](https://tc39.es/ecma262/#sec-completion-record-specification-type)
 
-It essentially means if the completion record is considered abrupt, the line should return Completion of said argument. Else the argument should be set to the value of argument. 
+It means if the completion record is considered abrupt, the line should return Completion of said argument. Else the argument should be set to the value of argument. 

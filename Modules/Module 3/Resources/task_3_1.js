@@ -1,0 +1,1 @@
+console.log([].groupBy(i=> "This is a test of the callbackfn, if you can see this it means your function works!"));
