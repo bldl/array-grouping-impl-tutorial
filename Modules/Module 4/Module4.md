@@ -2,12 +2,12 @@
 
 Testing our implementation is important. It ensures all parts of the implementation function according to the specification. 
 
-In this module we will be learning how to run test262 tests as well as implement tests ourselves. 
+In this module we will be learning how to run Test262 tests, as well as implement tests ourselves. 
 
 
 # **4.1** Running jstests
 
-There are two different test suites built into mach. The one we are interested in is the Test262 suite. This is the tests all EcmaScript engines have to conform to ensure JavaScript is implemented correctly. 
+There are two different test suites built into SpiderMonkey. The one we are interested in is the Test262 suite. This is the tests all EcmaScript engines have to conform to ensure JavaScript is implemented correctly. 
 
 Tests from the Test262 test suite are located in `mozilla-unified/js/src/tests/test262`. Mostly we are interested in the folder `built-ins`, as this is where the tests for `Array` are located. 
 
@@ -54,7 +54,9 @@ Whether or not to implement tests before or after a part of the implementation o
 
 General guide to writing tests for a new feature in SpiderMonkey:
 
-Go through the specification line by line, and ask yourself the question: "How can this break?". If there exists a scenario in which the line of code can break, or behave unexpected, implement a test for it. 
+
+**Need input here**
+Go through the specification line by line, and ask the question: "How can this break?". If there exists a scenario in which the line of code can break, or behave unexpected, implement a test for it. 
 
 # **4.3** How to implement a test
 
@@ -102,6 +104,10 @@ Create the folder for `Àrray.prototype.group` in the folder `mozilla-unified/js
 Run your test and verify your implementation works so far!
 
 # **4.3** MAIN TASK
+
+Consider the lines 1,2,4 and 5 in the specification of `Array.prototype.groupBy`, write down what are possible mistakes that can happen in the implementation. 
+
+Consider how to test if these mistakes have happened.
 
 Write tests for the lines 1-5 you implemented in Module 2. 
 
