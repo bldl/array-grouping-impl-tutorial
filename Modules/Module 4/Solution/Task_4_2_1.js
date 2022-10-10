@@ -1,0 +1,1 @@
+assert.sameValue(1, [].one());

@@ -46,7 +46,7 @@ $ ./mach jstests -- -h
 
 2. Make `jstests` output the result of each test within `Array.prototype.filter`
 
-# **4.2** Implementing our own tests
+# **4.2** How to test a feature
 
 Tests are usefull to test if some previous functionality is broken by new additions, or to test a newly written implementation. 
 
@@ -56,10 +56,39 @@ General guide to writing tests for a new feature in SpiderMonkey:
 
 Go through the specification line by line, and ask yourself the question: "How can this break?". If there exists a scenario in which the line of code can break, or behave unexpected, implement a test for it. 
 
+# **4.3** How to implement a test
 
-## **Talk about how tests are written here!**
+Imagine some imaginary proposal for EcmaScript, the proposal is as follows:
+```
+Array.prototype.one([,thisArg])
+1. return 1
+```
 
-## **Task 4.2** Testing line 3
+This proposal does not have many lines to test, however tests are needed. There are two parts of this proposal that has to be tested:
+1. It has to return a number
+2. The number has to be one
+
+Now to write the test we create a file `isNumber.js` in the `Array/prototype/` folder. This file will go as follows:
+
+```js
+assert(function(){
+    return Number.isInteger([].one())
+}, "Result of one() is integer")
+```
+
+The tests created for Test262 use a binding called `assert`. This binding allows us to assert several different conditions. These are as follows:
+
+- `assert(boolean, message)`: Asserts the boolean is true, otherwise displays message if -o is run as test option
+- `assert.throws(e, f(){CODE_TO_TEST})`: assers that the function f returns the error e
+- `assert.sameValue(a, b, message)`: asserts that a and b contain the same value.
+- `assert.notSameValue(a, b, message)`: asserts that a and b do not contain the same value
+
+## **Task 4.2.1**
+
+Create a small script to test whether or not our imaginary proposal `Array.prototype.one` returns the value 1. 
+
+
+## **Task 4.2.2** Testing line 3
 
 Now that you know how to run tests, the best way to learn how to write them is to try.
 
@@ -72,3 +101,10 @@ Create the folder for `Àrray.prototype.group` in the folder `mozilla-unified/js
 
 Run your test and verify your implementation works so far!
 
+# **4.3** MAIN TASK
+
+Write tests for the lines 1-5 you implemented in Module 2. 
+
+Consider whether all lines have to be tested, or some are considered "foolproof"
+
+NB: Need a better word than foolproof
