@@ -54,7 +54,7 @@ Whether or not to implement tests before or after a part of the implementation o
 
 General guide to writing tests for a new feature in SpiderMonkey:
 
-Go through the specification line by line, and ask yourself the question: "How can this break?". If there exists a scenario in which the line of code can break, or behave unexpected, implement a test for it. 
+A general way to implement tests for a feature in SpiderMonkey, is to make a test for every line in the specification where one could imagine that something could break or behave unexpected.
 
 # **4.3** How to implement a test
 
@@ -78,14 +78,27 @@ assert(function(){
 
 The tests created for Test262 use a binding called `assert`. This binding allows us to assert several different conditions. These are as follows:
 
-- `assert(boolean, message)`: Asserts the boolean is true, otherwise displays message if -o is run as test option
+- `assert(function => boolean, message)`: Asserts the boolean is true, otherwise displays message if -o is run as test option
 - `assert.throws(e, f(){CODE_TO_TEST})`: assers that the function f returns the error e
 - `assert.sameValue(a, b, message)`: asserts that a and b contain the same value.
 - `assert.notSameValue(a, b, message)`: asserts that a and b do not contain the same value
 
+It is also important to add a `reportCompare(0,0);` at the end of your test, this will define the exit code expected and the actual exit code if this reportCompare is reached. Ex:
+
+If you want the test to fail explicitely you could write:
+```js
+if(failedCondition){
+    reportCompare(1,0);
+}else{
+    reportCompare(0,0);
+}
+```
+Where the first argument is the actual exit code and the 2nd is the expected. 
+
+
 ## **Task 4.2.1**
 
-Create a small script to test whether or not our imaginary proposal `Array.prototype.one` returns the value 1. 
+Create a small test, that ensures whether or not our imaginary proposal `Array.prototype.one` returns the value 1. 
 
 
 ## **Task 4.2.2** Testing line 3
