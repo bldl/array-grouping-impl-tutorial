@@ -9,8 +9,7 @@ It will also be discussing a good way to debug the implementation.
 Before the implementation can even start, the hooks into C++ is needed. In [Module 1](/Modules/Module%201/Module1.md), task 2.3 a new function was added. Now the same is needed. We have to create a function which takes the same parameters as in the specification. This can be done by adding the line:
 
 ```js
-JS_SELF_HOSTED_FN("groupBy", "GroupBy", 1,0),
-
+JS_SELF_HOSTED_FN("groupBy", "ArrayGroupBy", 1,0),
 ```
 
 The parameters for `JS_SELF_HOSTED_FN` are as follows, 

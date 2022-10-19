@@ -13,6 +13,8 @@ This means we can make changes, at "optimize" the implementation to the SpiderMo
 
 Have a look at the specification for `Array.prototype.groupBy`, what do you imagine could be optimized in our environment? 
 
+Further explanation of this will be provided in [`Module 7`](../Module%207/Module7.md).
+
 # **I am sort of stuck here, i do not know what else to start discussing, need some input from Daniel as to what is missing**
 
 **Comment about Module 5 by Rolf:**
@@ -23,6 +25,8 @@ Have a look at the specification for `Array.prototype.groupBy`, what do you imag
 It is now time to start implementing _Array Grouping_. 
 
 Start writing your implementation of the function `Array.prototype.groupBy`. There is not need to start on `groupByToMap`as this can be implemented by just modifying the `groupBy` function. 
+
+Try to adhere to the specification as much as possible, in order to ensure the spec is upheld. 
 
 Good luck! If you are stuck remember all you have learnt: 
 - Look at other implementations of previous features with similar specificaiton. 
