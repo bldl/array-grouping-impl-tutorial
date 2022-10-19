@@ -1,4 +1,4 @@
-# 7.0 Headline
+# **7.0** Optimizing and Monkey-Patching!
 
 This module will focus on moving away from the original specification while still upholding the limitations. We will be optimizing our implementation for SpiderMonkey, and avoiding SpiderMonkey specific issues.
 
@@ -10,7 +10,7 @@ The implementor of a proposal is allowed to optimize the implementation. Doing t
 In [Task 5.1.1](../Module%205/Module5.md) it was discussed how we could improve the implementation for our environment. 
 
 In the following section we will refer to each "step" of the spec by the number and letter alloted, example step 6.i is:
-```
+```js
 a. Let Pk be ! ToString(𝔽(k)).
 ```
 
@@ -20,7 +20,7 @@ In order to not create the data structure ounce in a List, then populate it into
 ```
 Then we have to change `Array.prototype.AddValueToKeyedGroup` to function with an Object, and insert lists containing the values corresponding to each Key created by the `callbackfn`
 
-To create a `OrdinaryObject` we can just use the `{}` for now, as in 7.2 we will be discussing how to access `engine space` objects, and why we need to do that. For now just use `{}`
+To create a `OrdinaryObject` we can just use the `{}` for now, as in 7.2 we will be discussing how to access standard objects, and why we need standard objects. For now just use `{}`
 
 
 
