@@ -1,4 +1,4 @@
-
+let array = ['test'];
 Object.defineProperty(Object.prototype, 'test', {
   set(v) {
     throw new Error('Your implementation is subseptable to Monkey-Patching of the Object.prototype.set() property');
