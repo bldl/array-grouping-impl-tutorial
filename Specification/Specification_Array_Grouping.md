@@ -29,10 +29,10 @@ When the `groupBy` method is called with one or two arguments, the following ste
     d. Perform ! [AddValueToKeyedGroup](#23-addvaluetokeyedgroup--groups-key-value-)(groups, propertyKey, kValue).
     e. Set k to k + 1.
 7. Let obj be ! OrdinaryObjectCreate(null).
-8. For each [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\], \[\[Elements\]\] } g of groups, do
-    1.  a. Let elements be ! [CreateArrayFromList](https://tc39.es/ecma262/#sec-createarrayfromlist)(g.\[\[Elements\]\]).
-    2.  b. Perform ! [CreateDataPropertyOrThrow](https://tc39.es/ecma262/#sec-createdatapropertyorthrow)(obj, g.\[\[Key\]\], elements).
-9.  9\. Return obj.
+8. For each [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\], \[\[Elements\]\] } g of groups, do\
+    a. Let elements be ! [CreateArrayFromList](https://tc39.es/ecma262/#sec-createarrayfromlist)(g.\[\[Elements\]\]).\
+    b. Perform ! [CreateDataPropertyOrThrow](https://tc39.es/ecma262/#sec-createdatapropertyorthrow)(obj, g.\[\[Key\]\], elements).\
+9.  Return obj.
 
 Note 2
 
@@ -57,24 +57,24 @@ The return value of `groupByMap` is a Map.
 
 When the `groupByMap` method is called with one or two arguments, the following steps are taken:
 
-1.  1\. Let O be ? [ToObject](https://tc39.es/ecma262/#sec-toobject)(this value).
-2.  2\. Let len be ? [LengthOfArrayLike](https://tc39.es/ecma262/#sec-lengthofarraylike)(O).
-3.  3\. If [IsCallable](https://tc39.es/ecma262/#sec-iscallable)(callbackfn) is false, throw a TypeError exception.
-4.  4\. Let k be 0.
-5.  5\. Let groups be a new empty [List](https://tc39.es/ecma262/#sec-list-and-record-specification-type).
-6.  6\. Repeat, while k < len
-    1.  a. Let Pk be ! [ToString](https://tc39.es/ecma262/#sec-tostring)([𝔽](https://tc39.es/ecma262/#𝔽)(k)).
-    2.  b. Let kValue be ? [Get](https://tc39.es/ecma262/#sec-get-o-p)(O, Pk).
-    3.  c. Let key be ? [Call](https://tc39.es/ecma262/#sec-call)(callbackfn, thisArg, « kValue, [𝔽](https://tc39.es/ecma262/#𝔽)(k), O »).
-    4.  d. If key is \-0𝔽, set key to +0𝔽.
-    5.  e. Perform ! [AddValueToKeyedGroup](#23-addvaluetokeyedgroup--groups-key-value-)(groups, key, kValue).
-    6.  f. Set k to k + 1.
-7.  7\. Let map be ! [Construct](https://tc39.es/ecma262/#sec-construct)([%Map%](https://tc39.es/ecma262/#sec-map-constructor)).
-8.  8\. For each [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\], \[\[Elements\]\] } g of groups, do
-    1.  a. Let elements be ! [CreateArrayFromList](https://tc39.es/ecma262/#sec-createarrayfromlist)(g.\[\[Elements\]\]).
-    2.  b. Let entry be the [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\]: g.\[\[Key\]\], \[\[Value\]\]: elements }.
-    3.  c. Append entry as the last element of map.\[\[MapData\]\].
-9.  9\. Return map.
+1.  Let O be ? [ToObject](https://tc39.es/ecma262/#sec-toobject)(this value).
+2.  Let len be ? [LengthOfArrayLike](https://tc39.es/ecma262/#sec-lengthofarraylike)(O).
+3.  If [IsCallable](https://tc39.es/ecma262/#sec-iscallable)(callbackfn) is false, throw a TypeError exception.
+4.  Let k be 0.
+5.  Let groups be a new empty [List](https://tc39.es/ecma262/#sec-list-and-record-specification-type).
+6.  Repeat, while k < len\
+    a. Let Pk be ! [ToString](https://tc39.es/ecma262/#sec-tostring)([𝔽](https://tc39.es/ecma262/#𝔽)(k)).\
+    b. Let kValue be ? [Get](https://tc39.es/ecma262/#sec-get-o-p)(O, Pk).\
+    c. Let key be ? [Call](https://tc39.es/ecma262/#sec-call)(callbackfn, thisArg, « kValue, [𝔽](https://tc39.es/ecma262/#𝔽)(k), O »).\
+    d. If key is \-0𝔽, set key to +0𝔽.\
+    e. Perform ! [AddValueToKeyedGroup](#23-addvaluetokeyedgroup--groups-key-value-)(groups, key, kValue).\
+    f. Set k to k + 1.
+7.  Let map be ! [Construct](https://tc39.es/ecma262/#sec-construct)([%Map%](https://tc39.es/ecma262/#sec-map-constructor)).
+8.  For each [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\], \[\[Elements\]\] } g of groups, do\
+    a. Let elements be ! [CreateArrayFromList](https://tc39.es/ecma262/#sec-createarrayfromlist)(g.\[\[Elements\]\]).\
+    b. Let entry be the [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\]: g.\[\[Key\]\], \[\[Value\]\]: elements }.\
+    c. Append entry as the last element of map.\[\[MapData\]\].
+9.  Return map.
 
 Note 2
 
@@ -86,9 +86,9 @@ The `groupBy` function is intentionally generic; it does not require that its th
 
 The abstract operation AddValueToKeyedGroup takes arguments groups (a [List](https://tc39.es/ecma262/#sec-list-and-record-specification-type) of Records that have \[\[Key\]\] and \[\[Elements\]\] fields), key (an [ECMAScript language value](https://tc39.es/ecma262/#sec-ecmascript-language-types)), and value (an [ECMAScript language value](https://tc39.es/ecma262/#sec-ecmascript-language-types)). It performs the following steps when called:
 
-1.  1\. If groups contains a [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) g such that ! [SameValue](https://tc39.es/ecma262/#sec-samevalue)(g.\[\[Key\]\], key) is true, then
-    1.  a. [Assert](https://tc39.es/ecma262/#assert): exactly one element of groups meets this criteria.
-    2.  b. Append value as the last element of g.\[\[Elements\]\].
-2.  2\. Else,
-    1.  a. Let group be the [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\]: key, \[\[Elements\]\]: « value » }.
-    2.  b. Append group as the last element of groups.
+1.  If groups contains a [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) g such that ! [SameValue](https://tc39.es/ecma262/#sec-samevalue)(g.\[\[Key\]\], key) is true, then\
+    a. [Assert](https://tc39.es/ecma262/#assert): exactly one element of groups meets this criteria.\
+    b. Append value as the last element of g.\[\[Elements\]\].\
+2.  Else,\
+    a. Let group be the [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\]: key, \[\[Elements\]\]: « value » }.\
+    b. Append group as the last element of groups.
