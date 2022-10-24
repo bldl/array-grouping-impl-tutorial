@@ -26,7 +26,7 @@ When the `groupBy` method is called with one or two arguments, the following ste
     a. Let Pk be ! [ToString](https://tc39.es/ecma262/#sec-tostring)([𝔽](https://tc39.es/ecma262/#𝔽)(k)).\
     b. Let kValue be ? [Get](https://tc39.es/ecma262/#sec-get-o-p)(O, Pk).\
     c. Let propertyKey be ? [ToPropertyKey](https://tc39.es/ecma262/#sec-topropertykey)(? [Call](https://tc39.es/ecma262/#sec-call)(callbackfn, thisArg, « kValue, [𝔽](https://tc39.es/ecma262/#𝔽)(k), O »)).\
-    d. Perform ! [AddValueToKeyedGroup](#2.3-addvaluetokeyedgroup-(-groups,-key,-value-))(groups, propertyKey, kValue).
+    d. Perform ! [AddValueToKeyedGroup](#23-addvaluetokeyedgroup--groups-key-value-)(groups, propertyKey, kValue).
     e. Set k to k + 1.
 7. Let obj be ! OrdinaryObjectCreate(null).
 8. For each [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\], \[\[Elements\]\] } g of groups, do
@@ -67,7 +67,7 @@ When the `groupByMap` method is called with one or two arguments, the following 
     2.  b. Let kValue be ? [Get](https://tc39.es/ecma262/#sec-get-o-p)(O, Pk).
     3.  c. Let key be ? [Call](https://tc39.es/ecma262/#sec-call)(callbackfn, thisArg, « kValue, [𝔽](https://tc39.es/ecma262/#𝔽)(k), O »).
     4.  d. If key is \-0𝔽, set key to +0𝔽.
-    5.  e. Perform ! [AddValueToKeyedGroup](#23-addvaluetokeyedgroup-groups-key-value)(groups, key, kValue).
+    5.  e. Perform ! [AddValueToKeyedGroup](#23-addvaluetokeyedgroup--groups-key-value-)(groups, key, kValue).
     6.  f. Set k to k + 1.
 7.  7\. Let map be ! [Construct](https://tc39.es/ecma262/#sec-construct)([%Map%](https://tc39.es/ecma262/#sec-map-constructor)).
 8.  8\. For each [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\], \[\[Elements\]\] } g of groups, do
