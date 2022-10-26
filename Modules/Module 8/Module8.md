@@ -9,7 +9,7 @@ The goal of Test262 is to provide test material that covers every observable beh
 
 Using a shared testing suite has a lot of advantages. It allows the developers to see what engine is most compliant with the specification, what features are supported and what is currently unsupported. 
 
-As stated in Module X test262 has a website where the compliance of each engine can be viewed. 
+As stated in Module 4, test262 has a website where the compliance of each engine can be viewed. 
 
 [Test262 compliance](https://test262.report/)
 
@@ -28,6 +28,19 @@ A "testable" line is when the behaviour of the specification is observable to th
 ```
 3. If IsCallable(callbackfn) is false, throw a TypeError exception.
 ```
+
+The test for this line of the specification should look something like this:
+```js
+assert.throws(TypeError, function() {
+  [].group(null)
+}, "null callback throws TypeError");
+```
+
+The `assert` object is part of the Test262 suite, in this usecase we assert that `[].group(null)` throws and error.
+
+
+**Should i write this directly here instead of linking to the resource?**
+All the different functions on the assert object can be found in [CONTRIBUTING.md](https://github.com/tc39/test262/blob/main/CONTRIBUTING.md#test-environment) in the official test262 github repository. 
 
 ## **Task 8.2.1** What lines are testable?
 
@@ -54,5 +67,3 @@ The tests should ensure that both `groupBy` and `groupByToMap` adhere to the [sp
 The official tests for `groupBy` (now named `group`) can be found [here](https://github.com/tc39/test262/pull/3354)
 
 The official tests for `groupByToMap` (now named `groupToMap`) can be found [here](https://github.com/tc39/test262/pull/3353)
-
-
