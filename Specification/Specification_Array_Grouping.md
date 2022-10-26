@@ -1,41 +1,94 @@
-<emu-clause id="sec-array.prototype.groupby">
-<h1><span class="secnum">2.1</span> Array.prototype.groupBy ( <var>callbackfn</var> [ , <var>thisArg</var> ] )</h1>
-<emu-note><span class="note">Note 1</span><div class="note-contents">
-    <p><var>callbackfn</var> should be a function that accepts three arguments. <code>groupBy</code> calls <var>callbackfn</var> once for each element in the array, in ascending order, and constructs a new object of arrays. Each value returned by <var>callbackfn</var> is coerced to a property key, and the associated element is included in the array in the constructed object according to this property key.</p>
-    <p>If a <var>thisArg</var> parameter is provided, it will be used as the <emu-val>this</emu-val> value for each invocation of <var>callbackfn</var>. If it is not provided, <emu-val>undefined</emu-val> is used instead.</p>
-    <p><var>callbackfn</var> is called with three arguments: the value of the element, the index of the element, and the object being traversed.</p>
-    <p><code>groupBy</code> does not directly mutate the object on which it is called but the object may be mutated by the calls to <var>callbackfn</var>.</p>
-    <p>The range of elements processed by <code>groupBy</code> is set before the first call to <var>callbackfn</var>. Elements which are appended to the array after the call to <code>groupBy</code> begins will not be visited by <var>callbackfn</var>. If existing elements of the array are changed their value as passed to <var>callbackfn</var> will be the value at the time <code>groupBy</code> visits them; elements that are deleted after the call to <code>groupBy</code> begins and before being visited are still visited and are either looked up from the prototype or are <emu-val>undefined</emu-val>.</p>
-    <p>The return value of <code>groupBy</code> is an object that does not inherit from <var>Object.prototype</var>.</p>
-</div></emu-note>
-<p>When the <code>groupBy</code> method is called with one or two arguments, the following steps are taken:</p>
-<emu-alg><ol><li><span style="font-size: 0px;" aria-hidden="true">1. </span>Let <var>O</var> be ?&nbsp;<emu-xref aoid="ToObject" id="_ref_0"><a href="https://tc39.es/ecma262/#sec-toobject">ToObject</a></emu-xref>(<emu-val>this</emu-val> value).</li><li><span style="font-size: 0px;" aria-hidden="true">2. </span>Let <var>len</var> be ?&nbsp;<emu-xref aoid="LengthOfArrayLike" id="_ref_1"><a href="https://tc39.es/ecma262/#sec-lengthofarraylike">LengthOfArrayLike</a></emu-xref>(<var>O</var>).</li><li><span style="font-size: 0px;" aria-hidden="true">3. </span>If <emu-xref aoid="IsCallable" id="_ref_2"><a href="https://tc39.es/ecma262/#sec-iscallable">IsCallable</a></emu-xref>(<var>callbackfn</var>) is <emu-val>false</emu-val>, throw a <emu-val>TypeError</emu-val> exception.</li><li><span style="font-size: 0px;" aria-hidden="true">4. </span>Let <var>k</var> be 0.</li><li><span style="font-size: 0px;" aria-hidden="true">5. </span>Let <var>groups</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li><span style="font-size: 0px;" aria-hidden="true">6. </span>Repeat, while <var>k</var> &lt; <var>len</var><ol><li><span style="font-size: 0px;" aria-hidden="true">a. </span>Let <var>Pk</var> be !&nbsp;<emu-xref aoid="ToString" id="_ref_3"><a href="https://tc39.es/ecma262/#sec-tostring">ToString</a></emu-xref>(<emu-xref href="#𝔽"><a href="https://tc39.es/ecma262/#𝔽">𝔽</a></emu-xref>(<var>k</var>)).</li><li><span style="font-size: 0px;" aria-hidden="true">b. </span>Let <var>kValue</var> be ?&nbsp;<emu-xref aoid="Get" id="_ref_4"><a href="https://tc39.es/ecma262/#sec-get-o-p">Get</a></emu-xref>(<var>O</var>, <var>Pk</var>).</li><li><span style="font-size: 0px;" aria-hidden="true">c. </span>Let <var>propertyKey</var> be ?&nbsp;<emu-xref aoid="ToPropertyKey" id="_ref_5"><a href="https://tc39.es/ecma262/#sec-topropertykey">ToPropertyKey</a></emu-xref>(? <emu-xref aoid="Call" id="_ref_6"><a href="https://tc39.es/ecma262/#sec-call">Call</a></emu-xref>(<var>callbackfn</var>, <var>thisArg</var>, « <var>kValue</var>, <emu-xref href="#𝔽"><a href="https://tc39.es/ecma262/#𝔽">𝔽</a></emu-xref>(<var>k</var>), <var>O</var> »)).</li><li><span style="font-size: 0px;" aria-hidden="true">d. </span>Perform !&nbsp;<emu-xref aoid="AddValueToKeyedGroup" id="_ref_7"><a href="#sec-add-value-to-keyed-group">AddValueToKeyedGroup</a></emu-xref>(<var>groups</var>, <var>propertyKey</var>, <var>kValue</var>).</li><li><span style="font-size: 0px;" aria-hidden="true">e. </span>Set <var>k</var> to <var>k</var> + 1.</li></ol></li><li><span style="font-size: 0px;" aria-hidden="true">7. </span>Let <var>obj</var> be !&nbsp;OrdinaryObjectCreate(<emu-val>null</emu-val>).</li><li><span style="font-size: 0px;" aria-hidden="true">8. </span>For each <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> { [[Key]], [[Elements]] } <var>g</var> of <var>groups</var>, do<ol><li><span style="font-size: 0px;" aria-hidden="true">a. </span>Let <var>elements</var> be !&nbsp;<emu-xref aoid="CreateArrayFromList" id="_ref_8"><a href="https://tc39.es/ecma262/#sec-createarrayfromlist">CreateArrayFromList</a></emu-xref>(<var>g</var>.[[Elements]]).</li><li><span style="font-size: 0px;" aria-hidden="true">b. </span>Perform !&nbsp;<emu-xref aoid="CreateDataPropertyOrThrow" id="_ref_9"><a href="https://tc39.es/ecma262/#sec-createdatapropertyorthrow">CreateDataPropertyOrThrow</a></emu-xref>(<var>obj</var>, <var>g</var>.[[Key]], <var>elements</var>).</li></ol></li><li><span style="font-size: 0px;" aria-hidden="true">9. </span>Return <var>obj</var>.</li></ol></emu-alg>
-<emu-note><span class="note">Note 2</span><div class="note-contents">
-    <p>The <code>groupBy</code> function is intentionally generic; it does not require that its <emu-val>this</emu-val> value be an Array object. Therefore it can be transferred to other kinds of objects for use as a method.</p>
-</div></emu-note>
-</emu-clause>
+2.1 Array.prototype.groupBy ( callbackfn \[ , thisArg \] )
+==========================================================
+
+Note 1
+
+callbackfn should be a function that accepts three arguments. `groupBy` calls callbackfn once for each element in the array, in ascending order, and constructs a new object of arrays. Each value returned by callbackfn is coerced to a property key, and the associated element is included in the array in the constructed object according to this property key.
+
+If a thisArg parameter is provided, it will be used as the this value for each invocation of callbackfn. If it is not provided, undefined is used instead.
+
+callbackfn is called with three arguments: the value of the element, the index of the element, and the object being traversed.
+
+`groupBy` does not directly mutate the object on which it is called but the object may be mutated by the calls to callbackfn.
+
+The range of elements processed by `groupBy` is set before the first call to callbackfn. Elements which are appended to the array after the call to `groupBy` begins will not be visited by callbackfn. If existing elements of the array are changed their value as passed to callbackfn will be the value at the time `groupBy` visits them; elements that are deleted after the call to `groupBy` begins and before being visited are still visited and are either looked up from the prototype or are undefined.
+
+The return value of `groupBy` is an object that does not inherit from Object.prototype.
+
+When the `groupBy` method is called with one or two arguments, the following steps are taken:
+
+1.  Let O be ? [ToObject](https://tc39.es/ecma262/#sec-toobject)(this value).
+2.  Let len be ? [LengthOfArrayLike](https://tc39.es/ecma262/#sec-lengthofarraylike)(O).
+3.  If [IsCallable](https://tc39.es/ecma262/#sec-iscallable)(callbackfn) is false, throw a TypeError exception.
+4.   Let k be 0.
+5.   Let groups be a new empty [List](https://tc39.es/ecma262/#sec-list-and-record-specification-type).
+6. Repeat, while k < len\
+    a. Let Pk be ! [ToString](https://tc39.es/ecma262/#sec-tostring)([𝔽](https://tc39.es/ecma262/#𝔽)(k)).\
+    b. Let kValue be ? [Get](https://tc39.es/ecma262/#sec-get-o-p)(O, Pk).\
+    c. Let propertyKey be ? [ToPropertyKey](https://tc39.es/ecma262/#sec-topropertykey)(? [Call](https://tc39.es/ecma262/#sec-call)(callbackfn, thisArg, « kValue, [𝔽](https://tc39.es/ecma262/#𝔽)(k), O »)).\
+    d. Perform ! [AddValueToKeyedGroup](#23-addvaluetokeyedgroup--groups-key-value-)(groups, propertyKey, kValue).
+    e. Set k to k + 1.
+7. Let obj be ! OrdinaryObjectCreate(null).
+8. For each [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\], \[\[Elements\]\] } g of groups, do\
+    a. Let elements be ! [CreateArrayFromList](https://tc39.es/ecma262/#sec-createarrayfromlist)(g.\[\[Elements\]\]).\
+    b. Perform ! [CreateDataPropertyOrThrow](https://tc39.es/ecma262/#sec-createdatapropertyorthrow)(obj, g.\[\[Key\]\], elements).\
+9.  Return obj.
+
+Note 2
+
+The `groupBy` function is intentionally generic; it does not require that its this value be an Array object. Therefore it can be transferred to other kinds of objects for use as a method.
+
+# 2.2 Array.prototype.groupByMap ( callbackfn \[ , thisArg \] )
 
 
-  <emu-clause id="sec-array.prototype.groupbymap">
-    <h1><span class="secnum">2.2</span> Array.prototype.groupByMap ( <var>callbackfn</var> [ , <var>thisArg</var> ] )</h1>
-    <emu-note><span class="note">Note 1</span><div class="note-contents">
-      <p><var>callbackfn</var> should be a function that accepts three arguments. <code>groupByMap</code> calls <var>callbackfn</var> once for each element in the array, in ascending order, and constructs a new Map of arrays. Each value returned by <var>callbackfn</var> is used as a key in the Map, and the associated element is included in the array in the constructed Map according to this key.</p>
-      <p>If a <var>thisArg</var> parameter is provided, it will be used as the <emu-val>this</emu-val> value for each invocation of <var>callbackfn</var>. If it is not provided, <emu-val>undefined</emu-val> is used instead.</p>
-      <p><var>callbackfn</var> is called with three arguments: the value of the element, the index of the element, and the object being traversed.</p>
-      <p><code>groupByMap</code> does not directly mutate the object on which it is called but the object may be mutated by the calls to <var>callbackfn</var>.</p>
-      <p>The range of elements processed by <code>groupByMap</code> is set before the first call to <var>callbackfn</var>. Elements which are appended to the array after the call to <code>groupByMap</code> begins will not be visited by <var>callbackfn</var>. If existing elements of the array are changed their value as passed to <var>callbackfn</var> will be the value at the time <code>groupByMap</code> visits them; elements that are deleted after the call to <code>groupByMap</code> begins and before being visited are still visited and are either looked up from the prototype or are <emu-val>undefined</emu-val>.</p>
-      <p>The return value of <code>groupByMap</code> is a Map.</p>
-    </div></emu-note>
-    <p>When the <code>groupByMap</code> method is called with one or two arguments, the following steps are taken:</p>
-    <emu-alg><ol><li><span style="font-size: 0px;" aria-hidden="true">1. </span>Let <var>O</var> be ?&nbsp;<emu-xref aoid="ToObject" id="_ref_10"><a href="https://tc39.es/ecma262/#sec-toobject">ToObject</a></emu-xref>(<emu-val>this</emu-val> value).</li><li><span style="font-size: 0px;" aria-hidden="true">2. </span>Let <var>len</var> be ?&nbsp;<emu-xref aoid="LengthOfArrayLike" id="_ref_11"><a href="https://tc39.es/ecma262/#sec-lengthofarraylike">LengthOfArrayLike</a></emu-xref>(<var>O</var>).</li><li><span style="font-size: 0px;" aria-hidden="true">3. </span>If <emu-xref aoid="IsCallable" id="_ref_12"><a href="https://tc39.es/ecma262/#sec-iscallable">IsCallable</a></emu-xref>(<var>callbackfn</var>) is <emu-val>false</emu-val>, throw a <emu-val>TypeError</emu-val> exception.</li><li><span style="font-size: 0px;" aria-hidden="true">4. </span>Let <var>k</var> be 0.</li><li><span style="font-size: 0px;" aria-hidden="true">5. </span>Let <var>groups</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li><span style="font-size: 0px;" aria-hidden="true">6. </span>Repeat, while <var>k</var> &lt; <var>len</var><ol><li><span style="font-size: 0px;" aria-hidden="true">a. </span>Let <var>Pk</var> be !&nbsp;<emu-xref aoid="ToString" id="_ref_13"><a href="https://tc39.es/ecma262/#sec-tostring">ToString</a></emu-xref>(<emu-xref href="#𝔽"><a href="https://tc39.es/ecma262/#𝔽">𝔽</a></emu-xref>(<var>k</var>)).</li><li><span style="font-size: 0px;" aria-hidden="true">b. </span>Let <var>kValue</var> be ?&nbsp;<emu-xref aoid="Get" id="_ref_14"><a href="https://tc39.es/ecma262/#sec-get-o-p">Get</a></emu-xref>(<var>O</var>, <var>Pk</var>).</li><li><span style="font-size: 0px;" aria-hidden="true">c. </span>Let <var>key</var> be ?&nbsp;<emu-xref aoid="Call" id="_ref_15"><a href="https://tc39.es/ecma262/#sec-call">Call</a></emu-xref>(<var>callbackfn</var>, <var>thisArg</var>, « <var>kValue</var>, <emu-xref href="#𝔽"><a href="https://tc39.es/ecma262/#𝔽">𝔽</a></emu-xref>(<var>k</var>), <var>O</var> »).</li><li><span style="font-size: 0px;" aria-hidden="true">d. </span>If <var>key</var> is <emu-val>-0</emu-val><sub>𝔽</sub>, set <var>key</var> to <emu-val>+0</emu-val><sub>𝔽</sub>.</li><li><span style="font-size: 0px;" aria-hidden="true">e. </span>Perform !&nbsp;<emu-xref aoid="AddValueToKeyedGroup" id="_ref_16"><a href="#sec-add-value-to-keyed-group">AddValueToKeyedGroup</a></emu-xref>(<var>groups</var>, <var>key</var>, <var>kValue</var>).</li><li><span style="font-size: 0px;" aria-hidden="true">f. </span>Set <var>k</var> to <var>k</var> + 1.</li></ol></li><li><span style="font-size: 0px;" aria-hidden="true">7. </span>Let <var>map</var> be !&nbsp;<emu-xref aoid="Construct" id="_ref_17"><a href="https://tc39.es/ecma262/#sec-construct">Construct</a></emu-xref>(<emu-xref href="#sec-map-constructor"><a href="https://tc39.es/ecma262/#sec-map-constructor">%Map%</a></emu-xref>).</li><li><span style="font-size: 0px;" aria-hidden="true">8. </span>For each <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> { [[Key]], [[Elements]] } <var>g</var> of <var>groups</var>, do<ol><li><span style="font-size: 0px;" aria-hidden="true">a. </span>Let <var>elements</var> be !&nbsp;<emu-xref aoid="CreateArrayFromList" id="_ref_18"><a href="https://tc39.es/ecma262/#sec-createarrayfromlist">CreateArrayFromList</a></emu-xref>(<var>g</var>.[[Elements]]).</li><li><span style="font-size: 0px;" aria-hidden="true">b. </span>Let <var>entry</var> be the <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> { [[Key]]: <var>g</var>.[[Key]], [[Value]]: <var>elements</var> }.</li><li><span style="font-size: 0px;" aria-hidden="true">c. </span>Append <var>entry</var> as the last element of <var>map</var>.[[MapData]].</li></ol></li><li><span style="font-size: 0px;" aria-hidden="true">9. </span>Return <var>map</var>.</li></ol></emu-alg>
-    <emu-note><span class="note">Note 2</span><div class="note-contents">
-      <p>The <code>groupBy</code> function is intentionally generic; it does not require that its <emu-val>this</emu-val> value be an Array object. Therefore it can be transferred to other kinds of objects for use as a method.</p>
-    </div></emu-note>
-  </emu-clause>
+Note 1
 
-  <emu-clause id="sec-add-value-to-keyed-group" type="abstract operation" aoid="AddValueToKeyedGroup">
-    <h1><span class="secnum">2.3</span> AddValueToKeyedGroup ( <var>groups</var>, <var>key</var>, <var>value</var> )</h1>
-    <p>The abstract operation AddValueToKeyedGroup takes arguments <var>groups</var> (a <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref> of Records that have [[Key]] and [[Elements]] fields), <var>key</var> (an <emu-xref href="#sec-ecmascript-language-types"><a href="https://tc39.es/ecma262/#sec-ecmascript-language-types">ECMAScript language value</a></emu-xref>), and <var>value</var> (an <emu-xref href="#sec-ecmascript-language-types"><a href="https://tc39.es/ecma262/#sec-ecmascript-language-types">ECMAScript language value</a></emu-xref>). It performs the following steps when called:</p>
-    <emu-alg><ol><li><span style="font-size: 0px;" aria-hidden="true">1. </span>If <var>groups</var> contains a <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> <var>g</var> such that !&nbsp;<emu-xref aoid="SameValue" id="_ref_19"><a href="https://tc39.es/ecma262/#sec-samevalue">SameValue</a></emu-xref>(<var>g</var>.[[Key]], <var>key</var>) is <emu-val>true</emu-val>, then<ol><li><span style="font-size: 0px;" aria-hidden="true">a. </span><emu-xref href="#assert"><a href="https://tc39.es/ecma262/#assert">Assert</a></emu-xref>: exactly one element of <var>groups</var> meets this criteria.</li><li><span style="font-size: 0px;" aria-hidden="true">b. </span>Append <var>value</var> as the last element of <var>g</var>.[[Elements]].</li></ol></li><li><span style="font-size: 0px;" aria-hidden="true">2. </span>Else,<ol><li><span style="font-size: 0px;" aria-hidden="true">a. </span>Let <var>group</var> be the <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref> { [[Key]]: <var>key</var>, [[Elements]]: « <var>value</var> » }.</li><li><span style="font-size: 0px;" aria-hidden="true">b. </span>Append <var>group</var> as the last element of <var>groups</var>.</li></ol></li></ol></emu-alg>
-  </emu-clause>
-  
+callbackfn should be a function that accepts three arguments. `groupByMap` calls callbackfn once for each element in the array, in ascending order, and constructs a new Map of arrays. Each value returned by callbackfn is used as a key in the Map, and the associated element is included in the array in the constructed Map according to this key.
+
+If a thisArg parameter is provided, it will be used as the this value for each invocation of callbackfn. If it is not provided, undefined is used instead.
+
+callbackfn is called with three arguments: the value of the element, the index of the element, and the object being traversed.
+
+`groupByMap` does not directly mutate the object on which it is called but the object may be mutated by the calls to callbackfn.
+
+The range of elements processed by `groupByMap` is set before the first call to callbackfn. Elements which are appended to the array after the call to `groupByMap` begins will not be visited by callbackfn. If existing elements of the array are changed their value as passed to callbackfn will be the value at the time `groupByMap` visits them; elements that are deleted after the call to `groupByMap` begins and before being visited are still visited and are either looked up from the prototype or are undefined.
+
+The return value of `groupByMap` is a Map.
+
+When the `groupByMap` method is called with one or two arguments, the following steps are taken:
+
+1.  Let O be ? [ToObject](https://tc39.es/ecma262/#sec-toobject)(this value).
+2.  Let len be ? [LengthOfArrayLike](https://tc39.es/ecma262/#sec-lengthofarraylike)(O).
+3.  If [IsCallable](https://tc39.es/ecma262/#sec-iscallable)(callbackfn) is false, throw a TypeError exception.
+4.  Let k be 0.
+5.  Let groups be a new empty [List](https://tc39.es/ecma262/#sec-list-and-record-specification-type).
+6.  Repeat, while k < len\
+    a. Let Pk be ! [ToString](https://tc39.es/ecma262/#sec-tostring)([𝔽](https://tc39.es/ecma262/#𝔽)(k)).\
+    b. Let kValue be ? [Get](https://tc39.es/ecma262/#sec-get-o-p)(O, Pk).\
+    c. Let key be ? [Call](https://tc39.es/ecma262/#sec-call)(callbackfn, thisArg, « kValue, [𝔽](https://tc39.es/ecma262/#𝔽)(k), O »).\
+    d. If key is \-0𝔽, set key to +0𝔽.\
+    e. Perform ! [AddValueToKeyedGroup](#23-addvaluetokeyedgroup--groups-key-value-)(groups, key, kValue).\
+    f. Set k to k + 1.
+7.  Let map be ! [Construct](https://tc39.es/ecma262/#sec-construct)([%Map%](https://tc39.es/ecma262/#sec-map-constructor)).
+8.  For each [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\], \[\[Elements\]\] } g of groups, do\
+    a. Let elements be ! [CreateArrayFromList](https://tc39.es/ecma262/#sec-createarrayfromlist)(g.\[\[Elements\]\]).\
+    b. Let entry be the [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\]: g.\[\[Key\]\], \[\[Value\]\]: elements }.\
+    c. Append entry as the last element of map.\[\[MapData\]\].
+9.  Return map.
+
+Note 2
+
+The `groupBy` function is intentionally generic; it does not require that its this value be an Array object. Therefore it can be transferred to other kinds of objects for use as a method.
+
+
+# 2.3 AddValueToKeyedGroup ( groups, key, value )
+
+
+The abstract operation AddValueToKeyedGroup takes arguments groups (a [List](https://tc39.es/ecma262/#sec-list-and-record-specification-type) of Records that have \[\[Key\]\] and \[\[Elements\]\] fields), key (an [ECMAScript language value](https://tc39.es/ecma262/#sec-ecmascript-language-types)), and value (an [ECMAScript language value](https://tc39.es/ecma262/#sec-ecmascript-language-types)). It performs the following steps when called:
+
+1.  If groups contains a [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) g such that ! [SameValue](https://tc39.es/ecma262/#sec-samevalue)(g.\[\[Key\]\], key) is true, then\
+    a. [Assert](https://tc39.es/ecma262/#assert): exactly one element of groups meets this criteria.\
+    b. Append value as the last element of g.\[\[Elements\]\].\
+2.  Else,\
+    a. Let group be the [Record](https://tc39.es/ecma262/#sec-list-and-record-specification-type) { \[\[Key\]\]: key, \[\[Elements\]\]: « value » }.\
+    b. Append group as the last element of groups.

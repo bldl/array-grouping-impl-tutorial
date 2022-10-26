@@ -5,6 +5,11 @@ Object.defineProperty(Object.prototype, 'test', {
   }
 });
 
+Object.defineProperty(Map.prototype, 'test', {
+    set(v) {
+      throw new Error('Your implementation is subseptable to Monkey-Patching of the Object.prototype.set() property');
+    }
+  });
 
 
 Object.defineProperty(Array.prototype, '0', {
