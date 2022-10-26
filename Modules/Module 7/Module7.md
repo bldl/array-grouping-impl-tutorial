@@ -52,7 +52,7 @@ This is an issue when implementing in Self-hosted code as the same objects used 
 
 In order to avoid Monkey-Patching problems in the implementations we can do one of the following:
 
-1. Assign the property by overriding any user defined property changes
+1. Assign the property safely
 
 2. Use the standard object that is not user-patchable.
 
@@ -62,6 +62,7 @@ Creating a standard object can be done by using the function `std_Object_create(
 
 The lists defined within properties of `obj` can be inherited from Array.prototype as long as we assign the properties safely, this can be done with the `DefineDataProperty(obj, key, val)` function. Where the Object to define the property on is obj, the key of the property is key and the value is val. 
 
+//Chapter about using user visible objects safely goes here
 
 
 # **7.2.1** Avoid Monkey Patching

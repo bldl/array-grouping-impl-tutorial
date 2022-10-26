@@ -35,6 +35,24 @@ View all lines in the specification of _Array grouping_ proposal. What parts of 
 
 Write down what lines are testable and compare them with the document provided [here](LINK TO Solution!)
 
-# **8.2** Standard tests for all new EcmaScript functions
+# **8.2** Standard tests for all new functions
 
-Testing Name, length so on and so forth. 
+All new functions added to JavaScript have to use the correct properties. That means setting the following properties correctly: `length`, `name`. Each of these properties should have some characteristics like ex: `enumerable` or `writable`.
+
+View the tests of the feature `Array.prototype.filter` to see an example of how these can be tested. 
+
+# **Task 8.2.1** Testing the properties
+
+Test if the properties of the implementations of `groupBy` and `groupByToMap` are correct. See 
+
+# **Main Task** Writing tests
+
+Write tests for the "testable" lines you wrote in task 8.2.1.
+
+The tests should ensure that both `groupBy` and `groupByToMap` adhere to the [specification](../../Specification/Specification_Array_Grouping.md)
+
+The official tests for `groupBy` (now named `group`) can be found [here](https://github.com/tc39/test262/pull/3354)
+
+The official tests for `groupByToMap` (now named `groupToMap`) can be found [here](https://github.com/tc39/test262/pull/3353)
+
+
