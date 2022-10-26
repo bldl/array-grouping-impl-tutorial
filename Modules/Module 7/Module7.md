@@ -65,9 +65,10 @@ The lists defined within properties of `obj` can be inherited from Array.prototy
 //Chapter about using user visible objects safely goes here
 
 
-# **7.2.1** Avoid Monkey Patching
+# **Main Task** Avoid Monkey Patching
 
-Change your implementation to avoid the Monkey Patching bug, then run tests provided [MonkeyTest.js](./Testfiles/MonkeyTest.js)
+Change your implementation to avoid the Monkey Patching bug, then run tests provided:\ [MonkeyTest.js](./Testfiles/MonkeyTest.js) and 
+[MonkeyTestMap.js](./Testfiles/MonkeyTestMap.js)
 
 If MonkeyTest.js does not throw an error, your implementation is not subseptable to MonkeyPatching. 
 
