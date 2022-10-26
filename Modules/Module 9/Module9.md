@@ -39,4 +39,46 @@ Clean up the implementation. Check the code syntax with a linter or beutifyer. A
 
 # **9.3** Cleaning up Test262 tests and adhering to the contributor rules. 
 
-BlablablabalTestSpecifications!
+When writing tests for the Test262 test suite we need to adhere to the rules and syntax stipulated in [CONTRIBUTING.MD](https://github.com/tc39/test262/blob/main/CONTRIBUTING.md)
+
+Most importantly is the large header (comment) present at the top of any test file. Examples of how this is written can be found in the test262 tests in SpiderMonkey. Try to find a resent proposal, as there have been changes to the rules set by Test262. 
+
+An example of the header:
+```
+// Copyright (c) 2021 Ecma International.  All rights reserved.
+// This code is governed by the BSD license found in the LICENSE file.
+
+/*---
+esid: sec-array.prototype.group
+description: Array.prototype.group iterates array-like up to length
+info: |
+  22.1.3.14 Array.prototype.group ( callbackfn [ , thisArg ] )
+  ...
+  2. Let len be ? LengthOfArrayLike(O).
+  ...
+  4. Let k be 0.
+  ...
+  6. Repeat, while k < len
+  ...
+includes: [compareArray.js]
+features: [array-grouping]
+---*/
+```
+Explain the lines given here: 
+
+**Copyright:** The first two lines are the same in every test, they are the copyright of Ecma International.
+
+**esid:** The EcmaScript ID found in the specification of the proposal.
+
+**Description:** A brief description of what behaviour the test is examining. 
+
+**info:** What lines of the specification are being tested.
+
+**includes:** What Test262 features are being used, in the example above the `assert.compareArray` feauture is in use.
+
+**features:** What new feature is being tested.
+
+## **Task 9.3.1** Cleaning the tests
+
+Add the header to all the tests implemented for the proposal _Array grouping_. 
+
