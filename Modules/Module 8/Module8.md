@@ -5,7 +5,7 @@ THis module will consist of writing tests for the official EcmaScript testing su
 
 # **8.1** Why a shared testing suite?
 
-The goal of Test262 is to provide test material that covers every observable behavior specified in the ECMA-414 Standards Suite. It is the largest testing suite avalible for EcmaScript to date.
+The goal of Test262 is to provide test material that covers every observable behavior specified in the ECMA-414 Standards Suite. It is the largest testing suite available for EcmaScript to date.
 
 Using a shared testing suite has a lot of advantages. It allows the developers to see what engine is most compliant with the specification, what features are supported and what is currently unsupported. 
 
@@ -56,7 +56,9 @@ View the tests of the feature `Array.prototype.filter` to see an example of how 
 
 # **Task 8.2.1** Testing the properties
 
-Test if the properties of the implementations of `groupBy` and `groupByToMap` are correct. See 
+Write the tests to ensure the  properties of the implementations `groupBy` and `groupByToMap` are correct. 
+
+If you are stuck, view previously written tests for similar proposals. Like `Array.prototype.filter`. 
 
 # **Main Task** Writing tests
 
