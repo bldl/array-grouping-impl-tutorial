@@ -40,8 +40,9 @@ In order to avoid Monkey-Patching problems in the implementations we can do one 
 
 Both of these solutions are valid, however they suit different cases. Since the Object (`obj`) created in step 5 is the same as the Object that will return from `groupBy`, using option 2 where no user-patchable properties are included is purposeful.
 
-
 The lists defined within properties of `obj` can be inherited from Array.prototype as long as we assign the properties safely, this can be done with the `DefineDataProperty(obj, key, val)` function. Where the Object to define the property on is obj, the key of the property is key and the value is val. 
+
+To create a standard object (`OrdinaryObject`), the function `std_Object_create(null)` can be used. We use `null` to create a standard object. Using `std_Object_create` allows us to avoid Monkey-patching issues by using a non "User space" object, the "standard" version of the object passed in the first parameter.  
 
 
 # **Main Task** Avoid Monkey Patching
