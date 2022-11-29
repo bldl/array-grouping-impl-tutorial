@@ -6,9 +6,11 @@ This module will discuss the difference between "Engine space" and "User space" 
 
 Self-hosted code does come with some caveats. Ensuring that no parts of the implementation written can be interfered with by the user. This means we have to separate "Engine space" and "User space"
 
-"Engine space" refers to the objects and functions used by the engine. These are not accessible to the user, and can safely be used in implementations
+"Engine space" refers to the objects and functions used by the engine. These are not accessible to the user, and can safely be used in implementations. 
 
-"User space" refers to objects and functions used by the user, think of Array.prototype and its referring functions. These are accessible both by the engine and the user. Therefore care must be taken when using these objects, or else the implementation can be susceptible to Monkey Patching
+"User space" refers to objects and functions used by the user, think of Array.prototype and its referring functions. These are accessible both by the engine and the user. 
+
+Splitting the object space allows for more control when implementing new features, as it can be useful to have access to "User space" objects and functions. However, care must be taken when using these objects. If not, the implementation can be susceptible to Monkey Patching.
 
 # **5.2** Monkey Patching
 
@@ -47,6 +49,10 @@ To create a standard object (`OrdinaryObject`), the function `std_Object_create(
 
 # **Main Task** Avoid Monkey Patching
 
-Provided in [Tasks/MainTask.js](./Tasks/MainTask.js) is a "dummy" 
+Provided in [Tasks/MainTask.js](./Tasks/MainTask.js) is a "dummy" function. Add this function to `Array.js`, and add the hook inside `Array.cpp`. 
 
-//Keep writing this tomorrow
+Ensure this "dummy" is not susceptible to Monkey Patching. Remember to assign properties safely, and use standard objects where needed.
+
+Run the test file [MonkeyTest.js](./Testfiles/MonkeyTest.js), if all the tests pass you have successfully avoided Monkey Patching!
+
+
