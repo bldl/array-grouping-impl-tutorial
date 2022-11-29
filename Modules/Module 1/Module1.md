@@ -1,16 +1,12 @@
 # **1.0** Onboarding and Getting to Know the Tools
 
-Intro to module
-
-Wouldn't this be better on The intro module? Module 0 
-TBW: we are reimplementing an existing feature ......... 
-
+This module will focus on downloading the mozilla environment, setting up SpiderMonkey for development and introducing most tools used during development. 
 
 # **1.1** Installation of Mozilla unified and other required tools
 
 In this module we will be installing, building and testing SpiderMonkey.
 
-The exact steps in the installation process depend on the operating system. Before starting the installation. It is recomended to open a termnial and navigating the prefered location for the `mozilla_unified` folder to be stored in the future. 
+The exact steps in the installation process depend on the operating system. Before starting the installation. It is recommended to open a terminal and navigating the preferred location for the `mozilla_unified` folder to be stored in the future. 
 
 We refer the reader to specific instructions as follows:
 
@@ -33,12 +29,12 @@ Navigate to `mozilla_unified`.
 
 In order to run the SpiderMonkey engine, use the following commands in the `mozilla_unified` folder:
 
-```console
+```sh
 $ ./mach build
 ```
 Executing this command will result in the following output:
 
-```console
+```sh
 [user@machine mozilla-unified]$ ./mach build
 
 To view resource usage of the build, run |mach resource-usage|.
@@ -48,14 +44,14 @@ To take your build for a test drive, run: |mach run|
 
 
 In order to run the finished build, the following command is used:
-```console
+```sh
 $ ./mach run
 ```
 After this, the terminal will enter the JavaScript Read-Eval-Print-Loop mode, whose functionality is similar to a browser's console, and where arbitrary JavaScript code can be executed.
-```console
+```sh
 js> 
 ```
-This will be used throughout the tutorial to test our implemenation during development.
+This will be used throughout the tutorial to test our implementation during development.
 
 It is also possible to execute code stored in `.js` files; this is done by providing a filename as a parameter in the `./mach run` command.
 Doing this simplifies debugging and testing the implementations.
@@ -66,7 +62,7 @@ console.log("Hello World!");
 ```
 In order to use this file as the input of the current SpiderMonkey build, the file name should be passed as the first argument in the `run` command:
 
-```
+```sh
 $ ./mach run helloworld.js
 ```
 
@@ -83,9 +79,9 @@ Hello World!
 
 
 
-The imeplementation of _Array Grouping_ feature (methods `Array.group`, `Array.groupToMap`) already exists within the current nightly build of SpiderMonkey. The code this tutorial is implementing alread exists in the `mozilla_unified` folder you have. We can remove this using the version control software Mercurial. In this tutorial we will not be using Mercurial for anything other than to apply patches. 
+The implementation of _Array Grouping_ feature (methods `Array.group`, `Array.groupToMap`) already exists within the current nightly build of SpiderMonkey. The code this tutorial is implementing already exists in the `mozilla_unified` folder you have. We can remove this using the version control software Mercurial. In this tutorial we will not be using Mercurial for anything other than to apply patches. 
 
-Mercurial has the usefull feature of letting the user output the difference between their codebase and the current "head". This feature will be usefull to us for removing the existing implementation, as well to import the solutions to tasks given in each module. 
+Mercurial has the useful feature of letting the user output the difference between their codebase and the current "head". This feature will be useful to us for removing the existing implementation, as well to import the solutions to tasks given in each module. 
 
 The patch used to remove _Array Grouping_ feature can be found here:
 [`patch_remove_Array-group.diff`](../../diff_files/patch_remove_Array-group.diff).
@@ -93,8 +89,8 @@ The patch used to remove _Array Grouping_ feature can be found here:
 How to apply the patch:
 
 1. Download the `patch_remove_Array-group.diff` file in this repository into the `mozilla_unified` folder.
-2. Run comand:
-    ```
+2. Run command:
+    ```sh
     hg import patch_remove_Array-group.diff -m "Remove pre-existing implementation of Array Grouping"
     ```
 
@@ -107,7 +103,7 @@ It will be provided a lot of `.diff` files as "Solutions" for each of the tasks 
 The file `example.diff` file used for this example can be found in [](Resources/example.diff)
 
 Contents of `example.diff`:
-```console
+```sh
 diff --git a/js/src/builtin/Array.js b/js/src/builtin/Array.js
 --- a/js/src/builtin/Array.js
 +++ b/js/src/builtin/Array.js
@@ -125,20 +121,20 @@ diff --git a/js/src/builtin/Array.js b/js/src/builtin/Array.js
 ```
 
 On line 1: 
-```console
+```sh
 diff --git a/js/src/builtin/Array.js b/js/src/builtin/Array.js
 ```
 The specific file in which the change has been made is located. The "head" of the folder structure is the `mozilla_unified` folder. 
 
 On lines 2 - 3:
-```console
+```sh
 --- a/js/src/builtin/Array.js
 +++ b/js/src/builtin/Array.js
 ```
 This indicated that there has been both addition/s and deletion/s to the file `Array.js`
 
 On lines 4 - 14:
-```console
+```sh
 @@ -5,7 +5,9 @@
  /* ES5 15.4.4.16. */
  function ArrayEvery(callbackfn /*, thisArg*/) {
@@ -177,7 +173,7 @@ The tasks below introduce how to make small changes to the SpiderMonkey engine, 
 One of the simplest ways to change a built in JavaScript function would be to just change the return value of that function. In this task, change the return value of the built in `Array.at` function to always return the number 42. 
 
 Tip: Take a look in the builtin folder, located at 
-```
+```sh
 mozilla_unified/js/src/builtin
 ```
 
@@ -190,7 +186,7 @@ Remember to test your implementation by building the engine!
 
 ### **1.5.3** Your own function
 
-Create a function on one of the builtins of JavaScript. 
+Create a function on one of the built-ins of JavaScript. 
 It is irrelevant what this implementation ends up as, the important thing is how to hook self hosted code into the .cpp files.
 
 An example of hooking JavaScript functions into c++ can be seen in `Array.cpp` at line 4571. This then corresponds to the function on line 104 in `Array.cpp`
