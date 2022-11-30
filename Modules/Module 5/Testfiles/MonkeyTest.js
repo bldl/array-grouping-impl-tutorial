@@ -1,7 +1,7 @@
 let array = ['test'];
 Object.defineProperty(Object.prototype, 'test', {
   set(v) {
-    throw new Error('Your implementation is subseptable to Monkey-Patching of the Object.prototype.set() property');
+    throw new Error('Your implementation is suspectable to Monkey-Patching of the Object.prototype.set() property');
   }
 });
 
@@ -9,7 +9,7 @@ Object.defineProperty(Object.prototype, 'test', {
 
 Object.defineProperty(Array.prototype, '0', {
   set(v) {
-    throw new Error('Your implementation is subseptable to Monkey-Patching of the Array.prototype.set() property');
+    throw new Error('Your implementation is suspectable to Monkey-Patching of the Array.prototype.set() property');
   }
 });
 
@@ -17,3 +17,4 @@ Object.defineProperty(Array.prototype, '0', {
 
 console.log(array.groupBy(key => key));
 
+//Rewrite these

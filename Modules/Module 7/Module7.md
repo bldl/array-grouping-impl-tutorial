@@ -1,74 +1,86 @@
-# **7.0** Optimizing and Monkey-Patching!
+# 7.0 Continuation of implementation.
 
-This module will focus on moving away from the original specification while still upholding the limitations. We will be optimizing our implementation for SpiderMonkey, and avoiding SpiderMonkey specific issues.
+When implementing a new feature, the implementor is allowed freedom to make changes based on their environment. This ensures optimal implementations for different engines and environments. 
+
+# **7.1** The specification is not the "end all be all"
+
+The specification is created to ensure all the implementations of JavaScript operate the same. It lays out the limitations and functionality of everything in JavaScript. This means it is the implementors job to ensure the feature they implement is consistent with the specification. As long as the implementation is consistent with the specification, the implementor is allowed to write it how they want.
+
+This means we can make changes, and "optimize" the implementation to the SpiderMonkey environment. 
+
+## **Task 7.1.1** What can be improved?
+
+Have a look at the specification for `Array.prototype.groupBy`, what do you imagine could be optimized in our environment? 
 
 
-# **7.1** Optimizing the implementation
+# **7.2** Optimizing the implementation
 
-The implementor of a proposal is allowed to optimize the implementation. Doing this can both increase performance and readability of the implementation. There is some risk associated with adhering to the specification. Therefore, when changing the implementation we have to ensure the implementation still adheres to the EcmaScript specification.
+The implementor of a proposal is allowed to optimize the implementation. Doing this can both increase performance and readability. There is some risk associated with not adhering to the specification. Therefore, when changing the implementation we have to ensure its behavior strictly adheres to the specification.
 
-In [Task 5.1.1](../Module%205/Module5.md) it was discussed how we could improve the implementation for our environment. 
-
-In the following section we will refer to each "step" of the spec by the number and letter alloted, example step 6.i is:
+In the following section we will refer to each "step" of the spec by the number and letter alloted, example step 5.i is:
 ```js
 a. Let Pk be ! ToString(𝔽(k)).
 ```
 
-In order to not create the data structure ounce in a List, then populate it into a JavaScript Object, we can apply it directly to a JavaScript Object. We can de this because we are using self hosted code where the JavaScript Objectsa are easily accessible. This would essentially change step 5 to become the following:
+In the current specification, a list of `key` -> [`value`, ...] pairs are stored in a list (Step 6d). Then this list is populated into a standard JavaScript object at steps 7 and 8. This can be avoided if the `key` -> [`value`, ...] pairs were immediately populated directly into a standard JavaScript object. 
+
+This would change step 5 to become the following:
 ```js
 5. Let obj be ! OrdinaryObjectCreate(null).
 ```
-Then we have to change `Array.prototype.AddValueToKeyedGroup` to function with an Object, and insert lists containing the values corresponding to each Key created by the `callbackfn`
-
-To create a `OrdinaryObject` we can just use the `{}` for now, as in 7.2 we will be discussing how to access standard objects, and why we need standard objects. For now just use `{}`
+Then we have to change `Array.AddValueToKeyedGroup` so it functions with a standard JavaScript object in stead of a List.
 
 
+## **Task 7.2.1**
 
-## **Task 7.1.1** Optimize the implementation
+Optimize the implementation of `Array.prototype.groupBy`, make sure it is not susceptible to Monkey Patching, even after it is optimized. 
 
-Change your implementation to use the new step 5, and populate the new JavaScript object directly instead of using a list. 
+# **7.3** The Map Object
 
-# **7.2** Monkey Patching
+The second part of this proposal is a very similar function `groupBy` titled `groupByMap`. The functionality of this function is extremely similar to `groupBy` with the exception that it returns a Map. 
 
-This chapter will be on Monkey Patching. Showcasing what it is and why it occurs, then how to avoid it by using standard JavaScript Objects. 
+The biggest differences between a Map and an Object are: 
+- In a regular Object, the key field can only be one of the following [integer, string, symbol]. However, a Map can have any data-type as key. 
+- A Map preserves the order elements were placed, while an Object does not. 
 
-Monkey-patching occurs when the user overrides some standard JavaScript function, object or property. Let us use an example where the user overrides the `Array.prototype.0` property where we change the `set()` function to throw an error. 
+Since a Map functions so similarly to an object, the biggest difference between the implementation of `groupBy` and `groupByMap` is initiating the data-structure. 
 
-Run the following code to see Monkey-Patching in action
+Since Monkey Patching is just as much a problem for Map as for an Object, the built-in constructor has to be acquired to ensure no "user-space" object is used. 
+
+There exists a function for just this purpose, `GetBuiltinConstructor`. It takes one parameter, the string name of the constructor it has to get with capital first letter. In this case that string is "Map".
+
+So to get an instance of a "engine-space" Map, we can use the function call
 ```js
-Object.defineProperty(Array.prototype, '0', {
-  set(v) {
-    throw new Error('Monkey-Patched!');
-  }
-});
-a = []
-a[a.length] = 99
-console.log(a[0])
+GetBuiltinConstructor("Map");
 ```
 
-When we try to set the property 0 (a.length) in the code above it returns an erro because we defined the function set() of property 0 to throw an error.
+# **7.4** Data in a Map
 
-This is an issue when implementing in Self-hosted code as the same objects used in the self hosted code are user patchable. This means if we use the same Array.prototype or Object.prototype in our implementation of `Array.prototype.groupBy` the implementation will have user defined behaviour. This is not adherent to the specification and therefore has to be fixed. 
+Even though a Map functions very similar to an Object, inserting data has to be done differently. This is both to avoid Monkey Patching, but also to utilize the functionality of a Map.
 
-In order to avoid Monkey-Patching problems in the implementations we can do one of the following:
+To insert data into a Map while utilizing the functionality a Map provides (ex: using Object as key), we have to use the `set()` function found on a Map. However, using this without safety would result in a Monkey Patchable implementation.
 
-1. Assign the property safely
+Getting data from a Map is similar to setting, as we have to utilize the `get()` function Map provides.
 
-2. Use the standard object that is not user-patchable.
+Since Map is a c++ implemented feature, we have to call the `set()`/`get()` function implemented in C++, this can be done with the `call_function(function, param1, parm2...)`. This function takes the name of the function in c++, the object to call the function on, then the parameters of the function named 
 
-Both of these solutions are valid, however they suit different cases. Since the Object (`obj`) created in step 5 is the same as the Object that will return from `groupBy`, using option 2 where no user-patchable properties are included is purposefull.
+However, just calling the map set function directly would result in a "user-space" version, we need the standard version ("engine-space"). This has to be extracted from the c++ implementation of Map and has to be defined as callable from JS. However this is out of scope for this guide.
 
-Creating a standard object can be done by using the function `std_Object_create()`
+The standard version of Map set can be used like this:
+```js
+//get data
+callFunction(std_Map_get, map, key);
+//set data
+callFunction(std_Map_set, map, key, value)
+```
+where:
+- `std_Map_get`/`std_Map_set` = function to be called
+- `map` = object apply function call to
+- `key` = key to either get or set data on
+- `value` = value to insert with key
 
-The lists defined within properties of `obj` can be inherited from Array.prototype as long as we assign the properties safely, this can be done with the `DefineDataProperty(obj, key, val)` function. Where the Object to define the property on is obj, the key of the property is key and the value is val. 
+## **Task 7.2.2** Implementing GroupByMap
 
-//Chapter about using user visible objects safely goes here
+Implement `Array.prototype.groupByMap` with optimizations. 
 
-
-# **Main Task** Avoid Monkey Patching
-
-Change your implementation to avoid the Monkey Patching bug, then run tests provided:\ [MonkeyTest.js](./Testfiles/MonkeyTest.js) and 
-[MonkeyTestMap.js](./Testfiles/MonkeyTestMap.js)
-
-If MonkeyTest.js does not throw an error, your implementation is not subseptable to MonkeyPatching. 
-
+Ensure this is not susceptible to Monkey Patching by assigning properties safely and using the correct spaced Objects. 

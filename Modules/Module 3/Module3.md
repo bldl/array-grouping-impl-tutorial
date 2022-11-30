@@ -17,7 +17,7 @@ The parameters for `JS_SELF_HOSTED_FN` are as follows,
 2. Function name defined in Array.js
 3. Number of parameters the function is meant to take
 
-Now the function can be created in `Array.js`. Defined in the specification are the parameters the function is meant to take. This can be seen in the title of the specificaton:
+Now the function can be created in `Array.js`. Defined in the specification are the parameters the function is meant to take. This can be seen in the title of the specification:
 
 ```
 Array.prototype.groupBy ( callbackfn [ , thisArg ] )
@@ -25,7 +25,7 @@ Array.prototype.groupBy ( callbackfn [ , thisArg ] )
 
 The title defines we need one parameter, namely the parameter callbackfn. This will be the function used to map the elements of the array to their respective keys. 
 
-The function also takes the thisArg as a parameter, however since we are using self-hosted code. This parameter is always avalible to us, therefore we need not pass it to the function. 
+The function also takes the thisArg as a parameter, however since we are using self-hosted code. This parameter is always available to us, therefore we need not pass it to the function. 
 
 ## **Task 3.1** Creating and testing the function
 
@@ -42,7 +42,7 @@ To test the function and to check whether or not it actually returns the result 
 
 # **3.2** Implementing the first line
 
-In order to start we have to figure out how to perform the built in EcmaScript function `ToObject`. The fastest way of figuring this out is looking up another function in the specification that utilises this function, this is done in order to view how they got that same functionality. 
+In order to start we have to figure out how to perform the built in EcmaScript function `ToObject`. The fastest way of figuring this out is looking up another function in the specification that utilizes this function, this is done in order to view how they got that same functionality. 
 
 The first place to look is usually inside the same object as the one we are working on. In this case that is `Array.js`
 
@@ -69,11 +69,11 @@ Our first implemented line should look like this:
 
 # **3.3** Debugging code
 
-As we are working inside SpiderMonkey, a lot of built in functions and objects are not avalible to us. One such object is the `console` object. Therefore we cannot use the regular "print to console" debugging method. 
+As we are working inside SpiderMonkey, a lot of built in functions and objects are not available to us. One such object is the `console` object. Therefore we cannot use the regular "print to console" debugging method. 
 
-The engine does not give very descriptive error messages most of the time, most of the time it just silently failes without even producing output when trying to do `./mach run`. In order to figure out where the error might be when developing, it is smart to create a `test` function. 
+The engine does not give very descriptive error messages most of the time, most of the time it just silently failed without even producing output when trying to do `./mach run`. In order to figure out where the error might be when developing, it is smart to create a `test` function. 
 
-This test function can be used to test individual lines of the implementation. This will enable narrowing down on what line is producing the undesired behaviour. 
+This test function can be used to test individual lines of the implementation. This will enable narrowing down on what line is producing the undesired behavior. 
 
 An example of the implementation of a test function:
 ```js
@@ -103,4 +103,4 @@ Following the same "recipe" as defined in 3.2, try to implement the first 5 line
 
 Take a look at the specification as it is written. Can you find a way to shorten it? Are there lines in this specification that are not needed when writing it in SpiderMonkey?
 
-The idea of this task is to do an evaluation of the proposal, as the implementors are allowed to influense how a proposal is specified. 
+The idea of this task is to do an evaluation of the proposal, as the implementors are allowed to influence how a proposal is specified. 

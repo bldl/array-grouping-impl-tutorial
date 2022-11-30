@@ -2,7 +2,6 @@
 
 The focus of this module is learn how to read EcmaScript, the specification of JavaScript. 
 
-
 # 2.1 What is EcmaScript
 
 JavaScript is not as much a programming language as it is the implementation of the programming language called EcmaScript. EcmaScript is a general purpose programming language defined by the Ecma-262 Language specification. 
@@ -11,15 +10,15 @@ There exists a JavaScript engine in all major browsers used today. All these eng
 
 A fun place to view the differences between the engine is: [Test262 Report](https://test262.report/)
 
-In this tutoarial we will be using this specification to write the implementation of _Array Grouping_. 
+In this tutorial we will be using this specification to write the implementation of _Array Grouping_. 
 
 # 2.2 The specification of _Array Grouping_:
 
 The full specification of _Array Grouping_ can be viewed [here](/Specification/Specification_Array_Grouping.md)
 
-In this tutorial we will be working with an older version of the specification. The official one can be found [here](https://tc39.es/proposal-array-grouping/). The reason for this is it cannot be known whether changes will be made to the specification by the comitte. This makes keeping the tutorial up to date difficult if we used the official version.
+In this tutorial we will be working with an older version of the specification. The official one can be found [here](https://tc39.es/proposal-array-grouping/). The reason for this is it cannot be known whether changes will be made to the specification by the committee. This makes keeping the tutorial up to date difficult if we used the official version.
 
-EcmaScript is a Pseudocode specification. So reading it is quite like reading code. You can assume the keywords like for, while, get() and lists function the same as in any other language. The big difference here is the built in Ecma functions, like: 
+EcmaScript is a pseudocode specification. So reading it is quite like reading code. You can assume the keywords like for, while, get() and lists function the same as in any other language. The big difference here is the built in Ecma functions, like: 
 
 ```
 1. Let len be ? LengthOfArrayLike(O).
@@ -41,13 +40,13 @@ Find out what the ? in this line means. Then explain with your own words, what a
 
 ### Definitions of functions:
 
-Find the definiton (explanation) of the function `IsCallable()`. 
+Find the definition (explanation) of the function `IsCallable()`. 
 
 NB! It is not required to understand the definition(explanation) of the function. The purpose of this task is to learn how to navigate the EcmaScript specification. 
 
 # 2.3 Searchfox
 
-Searchfox is an incredibly powerful tool to search the codebase of `mozilla_central`. It enables the developer to look through the existing codebase much easier than diggin through files. This allows for fast location of code that might solve the same problem. 
+Searchfox is an incredibly powerful tool to search the codebase of `mozilla_central`. It enables the developer to look through the existing codebase much easier than digging through files. This allows for fast location of code that might solve the same problem. 
 
 ## [Searchfox](https://searchfox.org)
 
