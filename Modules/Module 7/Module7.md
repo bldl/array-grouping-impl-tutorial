@@ -28,7 +28,7 @@ This would change step 5 to become the following:
 ```js
 5. Let obj be ! OrdinaryObjectCreate(null).
 ```
-Then we have to change `Array.prototype.AddValueToKeyedGroup` so it functions with a standard JavaScript object in stead of a List.
+Then we have to change `Array.AddValueToKeyedGroup` so it functions with a standard JavaScript object in stead of a List.
 
 
 ## **Task 7.2.1**
@@ -37,13 +37,13 @@ Optimize the implementation of `Array.prototype.groupBy`, make sure it is not su
 
 # **7.3** The Map Object
 
-The second part of this proposal is a very similar function `groupBy` titled `groupByToMap`. The functionality of this function is extremely similar to `groupBy` with the exception that it returns a Map. 
+The second part of this proposal is a very similar function `groupBy` titled `groupByMap`. The functionality of this function is extremely similar to `groupBy` with the exception that it returns a Map. 
 
 The biggest differences between a Map and an Object are: 
 - In a regular Object, the key field can only be one of the following [integer, string, symbol]. However, a Map can have any data-type as key. 
 - A Map preserves the order elements were placed, while an Object does not. 
 
-Since a Map functions so similarly to an object, the biggest difference between the implementation of `groupBy` and `groupByToMap` is initiating the data-structure. 
+Since a Map functions so similarly to an object, the biggest difference between the implementation of `groupBy` and `groupByMap` is initiating the data-structure. 
 
 Since Monkey Patching is just as much a problem for Map as for an Object, the built-in constructor has to be acquired to ensure no "user-space" object is used. 
 
@@ -54,8 +54,33 @@ So to get an instance of a "engine-space" Map, we can use the function call
 GetBuiltinConstructor("Map");
 ```
 
-## **Task 7.2.2** Implementing GroupByToMap
+# **7.4** Data in a Map
 
-Implement `Array.prototype.groupByMap` with optimalizations. 
+Even though a Map functions very similar to an Object, inserting data has to be done differently. This is both to avoid Monkey Patching, but also to utilize the functionality of a Map.
+
+To insert data into a Map while utilizing the functionality a Map provides (ex: using Object as key), we have to use the `set()` function found on a Map. However, using this without safety would result in a Monkey Patchable implementation.
+
+Getting data from a Map is similar to setting, as we have to utilize the `get()` function Map provides.
+
+Since Map is a c++ implemented feature, we have to call the `set()`/`get()` function implemented in C++, this can be done with the `call_function(function, param1, parm2...)`. This function takes the name of the function in c++, the object to call the function on, then the parameters of the function named 
+
+However, just calling the map set function directly would result in a "user-space" version, we need the standard version ("engine-space"). This has to be extracted from the c++ implementation of Map and has to be defined as callable from JS. However this is out of scope for this guide.
+
+The standard version of Map set can be used like this:
+```js
+//get data
+callFunction(std_Map_get, map, key);
+//set data
+callFunction(std_Map_set, map, key, value)
+```
+where:
+- `std_Map_get`/`std_Map_set` = function to be called
+- `map` = object apply function call to
+- `key` = key to either get or set data on
+- `value` = value to insert with key
+
+## **Task 7.2.2** Implementing GroupByMap
+
+Implement `Array.prototype.groupByMap` with optimizations. 
 
 Ensure this is not susceptible to Monkey Patching by assigning properties safely and using the correct spaced Objects. 

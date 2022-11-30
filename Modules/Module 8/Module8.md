@@ -46,7 +46,7 @@ View all lines in the specification of _Array grouping_ proposal. What parts of 
 
 Write down what lines are testable and compare them with the document provided [here](LINK TO Solution!)
 
-# **8.2** Standard tests for all new functions
+# **8.3** Standard tests for all new functions
 
 All new functions added to JavaScript have to use the correct properties. That means setting the following properties correctly: `length`, `name`. Each of these properties have accessor descriptors that has to be set correctly.
 
