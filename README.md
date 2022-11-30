@@ -1,10 +1,19 @@
-# An intoduction to implementing a JavaScript feature in SpiderMonkey using EcmaScript specificiation
+# An introduction to implementing a JavaScript feature in SpiderMonkey using EcmaScript specification
 
-# Intro!
+# What is this?
 
-# Who am i?
+This is an tutorial/introduction into implementing a TC39 proposal in the SpiderMonkey JavaScript engine. It will consist of learning the proposal _Array Grouping_, reading the proposals specification, and creating the implementation while adhering to the specification. 
 
-# Feedback?
+The implementation will be mostly written in Self-hosted JavaScript, with a tiny bit of c++.
+
+
+# What will you learn
+
+This tutorial will give an introduction to:
+- Reading the ECMA-262 language specification
+- Implementing a TC39 proposal in SpiderMonkey
+- Testing a proposal with the Test262 test suite
+
 
 # Table of Contents
 
@@ -17,3 +26,13 @@
 ## 7. [Continuation and optimization](./Modules/Module%207/Module7.md)
 ## 8. [Test262](./Modules/Module%208/Module8.md)
 ## 9. [Polish and Cleanup](./Modules/Module%209/Module9.md)
+
+
+# Who am i?
+
+My name is Rolf Martin Glomsrud, i am a 4th year Master student at the University of Bergen. In 2021 i had a project where i implemented the proposal _Array Grouping_ in SpiderMonkey. When doing that i got an introduction into implementing TC39 proposals, and wanted to share what i learnt throughout that process. 
+
+# Feedback?
+
+If you have any feedback, corrections or other comments. Do not hesitate to contact ...... 
+
