@@ -35,8 +35,27 @@ Then we have to change `Array.prototype.AddValueToKeyedGroup` so it functions wi
 
 Optimize the implementation of `Array.prototype.groupBy`, make sure it is not susceptible to Monkey Patching, even after it is optimized. 
 
+# **7.3** The Map Object
+
+The second part of this proposal is a very similar function `groupBy` titled `groupByToMap`. The functionality of this function is extremely similar to `groupBy` with the exception that it returns a Map. 
+
+The biggest differences between a Map and an Object are: 
+- In a regular Object, the key field can only be one of the following [integer, string, symbol]. However, a Map can have any data-type as key. 
+- A Map preserves the order elements were placed, while an Object does not. 
+
+Since a Map functions so similarly to an object, the biggest difference between the implementation of `groupBy` and `groupByToMap` is initiating the data-structure. 
+
+Since Monkey Patching is just as much a problem for Map as for an Object, the built-in constructor has to be acquired to ensure no "user-space" object is used. 
+
+There exists a function for just this purpose, `GetBuiltinConstructor`. It takes one parameter, the string name of the constructor it has to get with capital first letter. In this case that string is "Map".
+
+So to get an instance of a "engine-space" Map, we can use the function call
+```js
+GetBuiltinConstructor("Map");
+```
+
 ## **Task 7.2.2** Implementing GroupByToMap
 
 Implement `Array.prototype.groupByMap` with optimalizations. 
 
-Ensure this is not susceptible to Monkey Patching. 
+Ensure this is not susceptible to Monkey Patching by assigning properties safely and using the correct spaced Objects. 
