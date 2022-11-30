@@ -55,4 +55,5 @@ Ensure this "dummy" is not susceptible to Monkey Patching. Remember to assign pr
 
 Run the test file [MonkeyTest.js](./Testfiles/MonkeyTest.js), if all the tests pass you have successfully avoided Monkey Patching!
 
-
+## [<--](../Module%204/Module4.md) [-->](../Module%206/Module6.md) 
+  

@@ -125,4 +125,6 @@ Write tests for the lines 1-5 you implemented in Module 2.
 
 Consider whether all lines have to be tested, or some are considered "foolproof"
 
-NB: Need a better word than foolproof
+
+## [<--](../Module%203/Module3.md) [-->](../Module%205/Module5.md) 
+      

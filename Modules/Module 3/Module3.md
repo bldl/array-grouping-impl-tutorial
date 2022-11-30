@@ -104,3 +104,6 @@ Following the same "recipe" as defined in 3.2, try to implement the first 5 line
 Take a look at the specification as it is written. Can you find a way to shorten it? Are there lines in this specification that are not needed when writing it in SpiderMonkey?
 
 The idea of this task is to do an evaluation of the proposal, as the implementors are allowed to influence how a proposal is specified. 
+
+
+## [<--](../Module%202/Module2.md) [-->](../Module%204/Module4.md)       

@@ -1,4 +1,4 @@
-# 7.0 Continuation of implementation.
+# 7.0 Continuation and optimization
 
 When implementing a new feature, the implementor is allowed freedom to make changes based on their environment. This ensures optimal implementations for different engines and environments. 
 
@@ -84,3 +84,6 @@ where:
 Implement `Array.prototype.groupByMap` with optimizations. 
 
 Ensure this is not susceptible to Monkey Patching by assigning properties safely and using the correct spaced Objects. 
+
+## [<--](../Module%206/Module6.md) [-->](../Module%208/Module8.md) 
+  

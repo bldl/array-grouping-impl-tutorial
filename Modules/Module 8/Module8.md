@@ -63,13 +63,7 @@ View the tests of the feature `Array.prototype.filter` to see an example of how 
 
 # **Task 8.2.1** Testing the properties
 
-<<<<<<< HEAD
-Write the tests to ensure the  properties of the implementations `groupBy` and `groupByToMap` are correct. 
-
-If you are stuck, view previously written tests for similar proposals. Like `Array.prototype.filter`. 
-=======
 Determine if the properties and accessor descriptors for `groupBy` and `groupByToMap` are correctly set. If they are not, set them correctly. 
->>>>>>> dev
 
 # **Main Task** Writing tests
 
@@ -85,3 +79,6 @@ When you have implemented your tests, compare them to the official tests in Test
 - The official tests for `groupBy` (now named `group`) can be found [here](https://github.com/tc39/test262/pull/3354)
 
 - The official tests for `groupByToMap` (now named `groupToMap`) can be found [here](https://github.com/tc39/test262/pull/3353)
+
+## [<--](../Module%207/Module7.md) [-->](../Module%209/Module9.md) 
+  
