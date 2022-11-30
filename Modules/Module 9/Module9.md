@@ -1,4 +1,4 @@
-# **9.0** Cleanup
+# **9.0** Polish and Cleanup
 
 The proposal is implemented and tests have been created. The implementation of _Array grouping_ is now close to being done. 
 
