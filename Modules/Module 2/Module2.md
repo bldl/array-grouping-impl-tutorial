@@ -1,93 +1,109 @@
-# 2.0 Introduction to EcmaScript!
+# 2.0 Introduction to EcmaScript
 
-The focus of this module is learn how to read EcmaScript, the specification of JavaScript. 
+The focus of this module is learn how to read Ecma-262, the language specification for JavaScript. 
 
-# 2.1 What is EcmaScript
+# 2.1 What is Ecma-262
 
-JavaScript is not as much a programming language as it is the implementation of the programming language called EcmaScript. EcmaScript is a general purpose programming language defined by the Ecma-262 Language specification. 
+EcmaScript is a general purpose programming language defined by the Ecma-262 Language specification. 
 
-There exists a JavaScript engine in all major browsers used today. All these engines are implemented differently, with different strengths and weaknesses when it comes extending them. One thing is for certain, EcmaScript is there to ensure they function equally to the end-developer. Any JavaScript ran in one engine should produce the exact same output in another. 
+There exists an EcmaScript engine in all major browsers. All these engines are implemented in different ways, with different strengths and weaknesses. Ecma-262 is there to ensure equal functionality for the end-developer. Any EcmaScript code executed in one engine should produce the exact same output when executed in another. 
 
-A fun place to view the differences between the engine is: [Test262 Report](https://test262.report/)
+A place to view the compliance of the engines to the specification is the [Test262 Report](https://test262.report/).
 
-In this tutorial we will be using this specification to write the implementation of _Array Grouping_. 
+In this tutorial, we will use a specification at [/Specification/Specification_Array_Grouping.md](/Specification/Specification_Array_Grouping.md) to write the implementation of _Array Grouping_.
 
-# 2.2 The specification of _Array Grouping_:
+# 2.2 The specification of _Array Grouping_
 
-The full specification of _Array Grouping_ can be viewed [here](/Specification/Specification_Array_Grouping.md)
+In this tutorial, we will be working with an older version of the specification. The official one can be found [here](https://tc39.es/proposal-array-grouping/). The reason for this is it cannot be known whether changes will be made to the specification by the committee in the future. This would make keeping this tutorial up to date difficult if we used the official version.
 
-In this tutorial we will be working with an older version of the specification. The official one can be found [here](https://tc39.es/proposal-array-grouping/). The reason for this is it cannot be known whether changes will be made to the specification by the committee. This makes keeping the tutorial up to date difficult if we used the official version.
-
-EcmaScript is a pseudocode specification. So reading it is quite like reading code. You can assume the keywords like for, while, get() and lists function the same as in any other language. The big difference here is the built in Ecma functions, like: 
+Reading Ecma-262 is similar to reading code. One can assume the familiar semantics for keywords such as, for example, `for`, `while`, `let`. An important difference here is the built-in Ecma-262 functions, as shown below: 
 
 ```
-1. Let len be ? LengthOfArrayLike(O).
+2. Let len be ? LengthOfArrayLike(list).
 ```
 
-In this line of the specification we define a variable len. This variable len gets assigned the result from the built in EcmaScript function `LengthOfArrayLike`.It is passed one argument, O, where O is the Object (read arraylike) we are grouping. 
+In this line of the specification we define a variable `len`. This variable `len` is assigned the result from the built-in Ecma-262 function `LengthOfArrayLike`. It is passed one argument, `list`, which is an array-like object we are grouping. 
 
-Each built in EcmaScript function can be viewed by clicking it's corresponding link. 
+Each built-in Ecma-262 function can be explored by clicking its corresponding link. 
 
-Everything written in the specification has a definition also written somewhere in the specification. In order to understand the specification for a given proposal, it is needed to look at the definitions of each of the used EcmaScript functions. Some of them are quite trivial, and can be explained solely by their names. However others, like `ToPropertyKey()` can be quite difficult to understand. This is when reading the functions definition is purposeful. 
+Everything written in the specification has a definition written somewhere else in the specification. In order to understand the specification for a given proposal, one needs to look at the definitions of each of the used Ecma-262 functions. Some of them are rather trivial and can be explained solely by their names. However, other functions, such as `ToPropertyKey()`, can be quite difficult to grasp. This is when reading the definition of a function is beneficial. 
 
-Some functions and parts of the specification are quite difficult to understand, even after having viewed their definition in the specification. This is where the method of looking at pre-existing code comes in. This can be done by using the powerful tool `SearchFox`
+Some functions and parts of the specification are quite difficult to understand, even after having viewed their definition in the specification. This is where the approach of looking at pre-existing code comes in. This can be done by using the powerful tool [_Searchfox_](https://searchfox.org).
 
 ## Tasks 2.2:
 
-### **2.2.1** What does ? mean:
+### **Task 2.2.1.** What does ? mean:
 
-Find out what the ? in this line means. Then explain with your own words, what and why it is needed. 
+Find out what the `?` in the following line means. 
+```
+2. Let len be ? LengthOfArrayLike(list).
+```
+After that, explain with your own words why it is needed. 
 
-### Definitions of functions:
+### **Task 2.2.2.** Definitions of functions:
 
 Find the definition (explanation) of the function `IsCallable()`. 
 
-NB! It is not required to understand the definition(explanation) of the function. The purpose of this task is to learn how to navigate the EcmaScript specification. 
+NB! It is not required to understand the definition (explanation) of the function. The purpose of this task is to learn how to navigate the Ecma-262 specification. 
 
 # 2.3 Searchfox
 
-Searchfox is an incredibly powerful tool to search the codebase of `mozilla_central`. It enables the developer to look through the existing codebase much easier than digging through files. This allows for fast location of code that might solve the same problem. 
+[Searchfox](https://searchfox.org) is a powerful tool to search the codebase of `mozilla_central`. It enables a developer to look through the existing codebase much easier than manually navigating through files. This allows for fast location of code that might use the same definition in Ecma-262.
 
-## [Searchfox](https://searchfox.org)
+When viewing the specification, some of its parts can be quite technical, and it can be not entirely clear what the functionality is, or how one is supposed to implement said functionality in SpiderMonkey. 
 
-When viewing the specification, parts can be quite technical, and not entirely clear what the functionality is, or how one is supposed to implement said functionality in SpiderMonkey. 
+If there is some line of the specification that is unclear, or difficult to understand, one can look for a similar -- or exactly the same -- line in another implemented function. The source code of that function can then be viewed in Searchfox by searching.
 
-Searchfox is used for this. If there is some line of the specification that is unclear, or difficult to understand. Find a similar, or exactly the same line in a previous function implemented. The source code of this function can then be viewed in Searchfox by searching for the function!
+There are usually parts of the specification that are quite similar when they are related to the same EcmaScript built-in functionality. It is therefore quite purposeful to start looking for a similar implementation on the same object. In the case of _Array Grouping_, a similar function is `Array.prototype.filter`.
 
-There is usually parts of the specification that are quite similar when they are related to the same JavaScript builtin. It is therefore quite clever to start looking for a similar implementation on the same Object. In the case of _Array Grouping_, a similar function is `Array.prototype.filter`
-
-Viewing the codebase of SpiderMonkey this way is a lot more efficient than using built in IDE search methods, as all the functions of SpiderMonkey are indexed and searchable in Searchfox. 
+Viewing the codebase of SpiderMonkey this way is a lot more efficient than using IDE's search, as all the functions of SpiderMonkey are indexed and searchable in Searchfox. 
 
 ## Tasks 2.4:
 
 ### **2.4.1** Find the implementation:
 
-In the task "Definition of functions" you where supposed to find the definition of `IsCallable` in EcmaScript. 
-Now find out what the implementation of the EcmaScript function `isCallable` is called in SpiderMonkey
+In the task [2.2.2](#task-222-definitions-of-functions) you were supposed to find the definition of `IsCallable` in Ecma-262. 
+Your task is to use Searchfox to find out what the implementation of the Ecma-262 function `IsCallable` is called in SpiderMonkey.
 
-TIP: Use Searchfox!
+# **2.5** Main task
 
-# **2.5** MAIN TASK
+## **Task 2.5.1**
 
-## **2.5.1**
-
-After this module, the implementation will start. It is strongly recommended to understand each part of the specification by this time. Therefore to get a deeper understanding, go through each line in the specification of `Array.prototye.GroupBy`, and write a short paragraph about how this line should function in the implementation. The length of each paragraph should be related to the complexity of the line. 
+After this module, the implementation will start. It is strongly recommended to understand each part of the specification by this time. Therefore, to get a deeper understanding, go through each line in the specification of `Array.prototype.GroupBy`, and write a short paragraph about how each line should function in the implementation. The length of each paragraph should be related to the complexity of the line. 
 
 Example:
 
 ```
 4. Let k be 0.
 ```
-Line 4: Set the variable k to contain the value 0.
+Line 4: Set the variable k to contain the number 0.
 
-Solution to this task can be found [here](Solution\Main_TASK_Mod2.md) 
+Solution to this task can be found [here](./Solution/Main_TASK_Mod2.md).
 
 
-## **2.5.2**
+# The functionality of GroupBy
 
-Find the differences between the function `groupBy` and the function `groupByToMap`. 
+The function `groupBy` groups elements in an array to `key` -> [`value`, ...] paris based on a `callbackfn` passed as an argument. The `callbackfn` is applied to each element of the array, this output defines the key for that element. If two elements have the same key they will be grouped in an array. 
 
-Why do we need two, so similar functions?
+This is the behavior defined in the [specification](../../Specification/Specification_Array_Grouping.md) of the proposal. 
+
+```js
+//Grouping even and odd numbers to key (even/odd)
+[1,2,3].groupBy(i => i % 2 == 0 ? 'even':'odd')
+//results in the object
+{'even':[2], 'odd':[1,3]}
+
+["hello", "world", "!"].groupBy(i=>i.length)
+//results in the object
+{5:["hello", "world"], 1:["!"] }
+```
+
+
+## **Task 2.5.2**
+
+Find the differences between `groupBy` and `groupByToMap`. 
+
+Why do we need two very similar functions?
 Why are the differences there in the first place?
 
 ## [<--](../Module%201/Module1.md) [-->](../Module%203/Module3.md)       

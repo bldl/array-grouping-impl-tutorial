@@ -2,9 +2,9 @@
 
 # What is this?
 
-This is an tutorial/introduction into implementing a TC39 proposal in the SpiderMonkey JavaScript engine. It will consist of learning the proposal _Array Grouping_, reading the proposals specification, and creating the implementation while adhering to the specification. 
+This is an tutorial/introduction into implementing a TC39 proposal in the SpiderMonkey JavaScript engine. It will consist of learning the proposal [_Array Grouping_](./Specification/Specification_Array_Grouping.md), reading the proposals specification, and creating the implementation while adhering to the specification. 
 
-The implementation will be mostly written in Self-hosted JavaScript, with a tiny bit of c++.
+The implementation will be mostly written in Self-hosted JavaScript, with several lines written in C++.
 
 
 # What will you learn
@@ -34,5 +34,5 @@ My name is Rolf Martin Glomsrud, i am a 4th year Master student at the Universit
 
 # Feedback?
 
-If you have any feedback, corrections or other comments. Do not hesitate to contact ...... 
+Humans are imperfect. If you find any errors, inaccuracies, or other issues. Please do not hesitate to create a Pull Request!
 

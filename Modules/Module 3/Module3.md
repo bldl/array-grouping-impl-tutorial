@@ -1,109 +1,122 @@
 # **3.0** Writing lines 1 - 5
 
-In this module, the lines 1 - 5 in the specification of _Array Grouping_ will be implemented. 
+In this module, the lines 1 - 5 in [_Array Grouping_](../../Specification/Specification_Array_Grouping.md) will be implemented. 
 
-It will also be discussing a good way to debug the implementation. 
+We will also discuss how to debug the implementation. 
 
 # **3.1** Creating the function
 
-Before the implementation can even start, the hooks into C++ is needed. In [Module 1](/Modules/Module%201/Module1.md), task 2.3 a new function was added. Now the same is needed. We have to create a function which takes the same parameters as in the specification. This can be done by adding the line:
+The first step is to define the `groupBy` function and then hook it into the C++ `Array` class. The function signature should comply with the Ecma-262 specification.
+
+```
+Array.prototype.groupBy ( callbackfn [ , thisArg ] )
+``` 
+
+The second parameter `thisArg` in the signature represents the array on which `groupBy` was invoked. Since we use self-hosted code, this parameter is always available via `this` keyword, and therefore, should not be passed. 
+
+By now, the implementation of `groupBy` in `Array.js` should look as follows.
+```js
+function ArrayGroupBy(callbackfn) {}
+```
+Note that the name of the function is `ArrayGroupBy` rather than `groupBy`: the convention in the SpiderMonkey engine dictates naming object methods by including the name of the encapsulating object in the name of the method (note also the PascalCase naming convention used here).
+
+To make this function available on `Array`, it has to be hooked into the C++ definition in `Array.cpp`:
 
 ```js
 JS_SELF_HOSTED_FN("groupBy", "ArrayGroupBy", 1,0),
 ```
 
-The parameters for `JS_SELF_HOSTED_FN` are as follows, 
-1. Name of the function avalible to the developer
-2. Function name defined in Array.js
-3. Number of parameters the function is meant to take
+The parameters for [`JS_SELF_HOSTED_FN`](https://searchfox.org/mozilla-central/rev/2fc2ccf960c2f7c419262ac7215715c5235948db/js/public/PropertySpec.h#438) are as follows: 
 
-Now the function can be created in `Array.js`. Defined in the specification are the parameters the function is meant to take. This can be seen in the title of the specification:
+| argument | description |
+| ---- | ----- |
+| `name` | name of the function available to the developer |
+| `selfHostedName` | function name defined in `Array.js` |
+| `nargs` | number of parameters the function is meant to take |
+| `flags` | flags | 
 
-```
-Array.prototype.groupBy ( callbackfn [ , thisArg ] )
-```
-
-The title defines we need one parameter, namely the parameter callbackfn. This will be the function used to map the elements of the array to their respective keys. 
-
-The function also takes the thisArg as a parameter, however since we are using self-hosted code. This parameter is always available to us, therefore we need not pass it to the function. 
+At this point, both `Array.groupBy` and `ArrayGroupBy` represent the same function. 
 
 ## **Task 3.1** Creating and testing the function
 
-Create the groupBy function, which takes some `callbackfn` as a parameter. Now in order to test this function, let's return the result of the `callbackfn`. 
+In order to test the function `Array.groupBy`, have it return the result of the `callbackfn`.
 
-Insert this line into the `groupBy` function you just created, no need to understand this yet as this is part of a future module. 
+Insert this line into the `ArrayGroupBy` function:
 
 ```js
   let result = callContentFunction(callbackfn, undefined, 0, 1, ToObject(this));
   return result;
 ```
+The exact meaning of this line will be explained in [Module 5](../Module%205/Module5.md); for now we do not focus on this. 
 
-To test the function and to check whether or not it actually returns the result of the `callbackfn` passed as a parameter, run the script provided in [Resources](/Modules/Module%203/Testfiles/) named test_task_3_1.js
+To test the function and to check whether or not it actually returns the result of the `callbackfn` passed as a parameter, run the script provided in [test_task_3_1.js](./Testfiles/test_task_3_1.js).
 
 # **3.2** Implementing the first line
 
-In order to start we have to figure out how to perform the built in EcmaScript function `ToObject`. The fastest way of figuring this out is looking up another function in the specification that utilizes this function, this is done in order to view how they got that same functionality. 
-
-The first place to look is usually inside the same object as the one we are working on. In this case that is `Array.js`
-
-Taking a look at the official specification, a very similar proposal to _Array Grouping_ is the _Array Filter_ proposal. Taking a look at the specification, se exact same line can be seen. 
-
-The line in question:
+We now focus on [line 1](../../Specification/Specification_Array_Grouping.md#21-arrayprototypegroupby--callbackfn---thisarg), which is as follows:
 ```js
 Let O be ? ToObject(this value).
 ```
-Now that we have found a usage of the `ToOject` function, we can take a look at it's implementation using either [Searchfox](https://searchfox.org), or we can simply find it in `mozilla_unified`. 
 
-The implementation of _Array Filter_ contains the following code corresponding to step 1 in the specification:
+In order to start implementing this line, we need to understand the semantics of the built-in Ecma-262 function `ToObject`. Built-in functions are defined in the specification in prose, and the question is whether or not there is already an implementation of such functions in the engine, and whether they are available to the developer in the current context.
+
+The fastest way to check whether a built-in function is implemented and available is to try to find another Ecma-262 function which utilizes this built-in function.
+The first place to look is usually inside the same object as the one we are working on. In our case, the object is `Array` defined in `Array.js`. There, we see the implementation of `ArrayFilter`, which implements the proposal _Array Filter_. The function `ArrayFilter` utilizes the built-in function `ToObject`: this means that we can look at the implementation of `ArrayFilter` (either by using [Searchfox](https://searchfox.org) or by simply finding it in `Array.js`), which contains the following code corresponding to line 1 in the specification:
+
 ```js
   /* Step 1. */
   var O = ToObject(this);
 ```
 
-This means that the EcmaScript function `ToObject` is already implemented in the SpiderMonkey engine. Therefore we can utilize it in our implementation of `groupBy`. 
+From this implementation, we see that the function `ToObject` is already implemented in the SpiderMonkey engine and is available to us. Therefore, we can utilize it in our own implementation of `ArrayGroupBy`. 
 
-Our first implemented line should look like this:
+Now, our implementation of line 1 of the _Array Grouping_ proposal should look like this:
 ```js
   var O = ToObject(this);
 ```
 
+Note that the proposal _Array Filter_ is very similar to the proposal _Array Grouping_. Indeed, the specifications of both proposals are quite similar: lines 1 - 5 in both cases are _exactly_ the same. We will use this fact later to implement lines 2 - 5 of the specification ([Task 3.4.1](#341-implementing-lines-2-5)).
+
 # **3.3** Debugging code
 
-As we are working inside SpiderMonkey, a lot of built in functions and objects are not available to us. One such object is the `console` object. Therefore we cannot use the regular "print to console" debugging method. 
+As we are working inside SpiderMonkey, a lot of built-in functions and objects are not available to us. One such object is the `console` object. Therefore, we cannot use the regular "print to console" debugging method. 
 
-The engine does not give very descriptive error messages most of the time, most of the time it just silently failed without even producing output when trying to do `./mach run`. In order to figure out where the error might be when developing, it is smart to create a `test` function. 
+The engine does not give very descriptive error messages, most of the time it just silently fails without producing output when one tries to run:
+```sh
+./mach run
+```
+In order to figure out where the error might be, it is useful to create a _test_ function. 
 
-This test function can be used to test individual lines of the implementation. This will enable narrowing down on what line is producing the undesired behavior. 
+This test function can be used to run individual lines of the implementation. This will allow narrowing down the "pool" of lines that might produce undesired behavior. 
 
-An example of the implementation of a test function:
+An example of the implementation of a test function is as follows:
 ```js
 function Test(number) {
     return number%2;
 }
 ```
 
-## **3.3** Tasks
+As was explained in this module, in order to run your own functions, you should hook them using `JS_SELF_HOSTED_FN`.
 
-### **3.3.1** Implementing a test function
 
-Add your own test function to the `Array.prototype` object. This function should return the last element of the array the function was called on. 
+## **Task 3.3.1** Implementing a test function
+
+Add your own test function to the `Array` object. This function should return the last element of the array the function was called on. 
 If the array contains no elements, the function should return `"Empty list"` instead. 
+
+```js
+["a", "b", "c"].test() // "c"
+[].test() // "Empty list"
+```
 
 TIP: Remember to hook your self hosted function in `Array.cpp`
 
 The Test-file for this task can be found in [Testfiles](./Testfiles/) named `test_task_3_3_1.js`
 
 
-## **3.4** Main task
-### **3.2.1** Implementing lines 2-5
+## **Task 3.3.2** Implementing lines 2-5
 
-Following the same "recipe" as defined in 3.2, try to implement the first 5 lines of the specification. Remember to always look for previous implementations that utilize the built-in EcmaScript functions. 
-
-### **3.2.2** Thought experiment
-
-Take a look at the specification as it is written. Can you find a way to shorten it? Are there lines in this specification that are not needed when writing it in SpiderMonkey?
-
-The idea of this task is to do an evaluation of the proposal, as the implementors are allowed to influence how a proposal is specified. 
+ Your task is to implement the first 5 lines of the _Array Grouping_ proposal specification. Remember to always look at previous implementations that utilize the same built-in Ecma-262 functions.  
 
 
 ## [<--](../Module%202/Module2.md) [-->](../Module%204/Module4.md)       
