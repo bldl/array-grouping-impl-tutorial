@@ -1,15 +1,15 @@
 # 4.0 Testing during implementation. 
 
-Testing our implementation is important. It ensures all parts of the implementation function according to the specification. 
+Testing the implementation is important. It ensures all parts of the implementation function according to the specification. 
 
 In this module we will be learning how to run Test262 tests, as well as implement tests ourselves. 
 
 
 # **4.1** Running jstests
 
-There are two different test suites built into SpiderMonkey. The one we are interested in is the Test262 suite. This is the tests all EcmaScript engines have to conform to ensure JavaScript is implemented correctly. 
+There are two different test suites built into SpiderMonkey. Jstests, also known as [Test262](https://github.com/tc39/test262), and SpiderMonkey specific tests. They are separated based on testing of spec adherence, and testing specific behavior of SpiderMonkey. Example: one of the problems discussed in [Module 5](../Module%205/Module5.md) (Monkey Patching) is a specific problem with SpiderMonkey and would therefore be tested with SpiderMonkey specific tests
 
-Tests from the Test262 test suite are located in `mozilla-unified/js/src/tests/test262`. Mostly we are interested in the folder `built-ins`, as this is where the tests for `Array` are located. 
+Tests from the Test262 test suite are located in the folder `mozilla-unified/js/src/tests/test262`.
 
 To run a test from Test262:
 
@@ -17,7 +17,7 @@ To run a test from Test262:
 $ ./mach jstests TEST_PATH_SUBSTRING 
 ```
 
-`TEST_PATH_SUBSTRING` means the path to either the directory of tests, or the specific test you want to run. An example in order to run the tests for all `Array` builtins, run the following command:
+`TEST_PATH_SUBSTRING` means the path to either the directory of tests, or the specific test you want to run. An example in order to run the tests for all `Array` built-ins, run the following command:
 
 ```console
 $ ./mach jstests built-ins/Array
@@ -48,18 +48,14 @@ $ ./mach jstests -- -h
 
 # **4.2** How to test a feature
 
-Tests are usefull to test if some previous functionality is broken by new additions, or to test a newly written implementation. 
+Tests provide quick and simple functionality to test if previously implemented parts of the specification breaks when new code is added.
 
-Whether or not to implement tests before or after a part of the implementation of _Array Grouping_ is up to the implementor, however tests are mandatory. 
-
-General guide to writing tests for a new feature in SpiderMonkey:
-
-A general way to implement tests for a feature in SpiderMonkey, is to make a test for every line in the specification where one could imagine that something could break or behave unexpected.
+Whether or not to implement tests before or after a part of the implementation of _Array Grouping_ is up to the implementor, however tests are mandatory for every new addition to EcmaScript. 
 
 
 # **4.3** How to implement a test
 
-Imagine some imaginary proposal for EcmaScript, the proposal is as follows:
+Imagine some proposal for Ecma-262, the proposal is as follows:
 ```
 Array.prototype.one([,thisArg])
 1. return 1
@@ -80,13 +76,13 @@ assert(function(){
 The tests created for Test262 use a binding called `assert`. This binding allows us to assert several different conditions. These are as follows:
 
 - `assert(function => boolean, message)`: Asserts the boolean is true, otherwise displays message if -o is run as test option
-- `assert.throws(e, f(){CODE_TO_TEST})`: assers that the function f returns the error e
+- `assert.throws(e, f(){CODE_TO_TEST})`: asserts that the function f returns the error e
 - `assert.sameValue(a, b, message)`: asserts that a and b contain the same value.
 - `assert.notSameValue(a, b, message)`: asserts that a and b do not contain the same value
 
 It is also important to add a `reportCompare(0,0);` at the end of your test, this will define the exit code expected and the actual exit code if this reportCompare is reached. Ex:
 
-If you want the test to fail explicitely you could write:
+If you want the test to fail explicitly you could write:
 ```js
 if(failedCondition){
     reportCompare(1,0);
@@ -115,15 +111,7 @@ Create the folder for `Àrray.prototype.group` in the folder `mozilla-unified/js
 
 Run your test and verify your implementation works so far!
 
-# **4.3** MAIN TASK
-
-Consider the lines 1,2,4 and 5 in the specification of `Array.prototype.groupBy`, write down what are possible mistakes that can happen in the implementation. 
-
-Consider how to test if these mistakes have happened.
-
-Write tests for the lines 1-5 you implemented in Module 2. 
-
-Consider whether all lines have to be tested, or some are considered "foolproof"
+Writing tests for _Array Grouping_ will take place in [Module 8](../Module%208/Module8.md).
 
 
 ## [<--](../Module%203/Module3.md) [-->](../Module%205/Module5.md) 

@@ -83,9 +83,10 @@ Solution to this task can be found [here](./Solution/Main_TASK_Mod2.md).
 
 # The functionality of GroupBy
 
-The function `groupBy` groups elements in an array to `key` -> [`value`, ...] paris based on a `callbackfn` passed as an argument. The `callbackfn` is applied to each element of the array, this output defines the key for that element. If two elements have the same key they will be grouped in an array. 
+The function `groupBy`, defined on the array prototype, takes one argument `callbackfn`. The argument specifies the callback function which is invoked on every element of an array.
+For an array `arr` with elements `a_1`, ..., `a_n`, the result of calling `arr.groupBy(callbackfn)` is an object whose _keys_ are unique values `callbackfn(a_i)`, and whose _values_ are arrays `[a_j,` ...`, a_k]`, where `callbackfn(a_j) ==` ... `== callbackfn(a_k)`.
 
-This is the behavior defined in the [specification](../../Specification/Specification_Array_Grouping.md) of the proposal. 
+That is, the function `groupBy` groups elements of an array to `key` -> `[v_1,` ... `, v_n]` pairs. The result of applying the `callbackfn` to each element of the array defines the key for that element. If two or more elements have the same key, they will be grouped in the same array.
 
 ```js
 //Grouping even and odd numbers to key (even/odd)
@@ -97,7 +98,7 @@ This is the behavior defined in the [specification](../../Specification/Specific
 //results in the object
 {5:["hello", "world"], 1:["!"] }
 ```
-
+This is the behavior defined in the [specification](../../Specification/Specification_Array_Grouping.md) of the proposal. 
 
 ## **Task 2.5.2**
 
