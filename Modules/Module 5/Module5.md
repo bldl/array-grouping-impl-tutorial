@@ -1,59 +1,61 @@
-# **5.0** Separating space & Monkey-Patching!
+# **5** Separating space and Monkey Patching
 
-This module will discuss the difference between "Engine space" and "User space" as well as showcasing the issue Monkey patching!
+This module will discuss the difference between non-user-observable objects (we refer to them as "engine space") and user-observable objects (we refer to them as "user space"). In addition, we discuss  _monkey patching_ in this module.
 
 # **5.1** "Engine space" vs "User space"
 
-Self-hosted code does come with some caveats. Ensuring that no parts of the implementation written can be interfered with by the user. This means we have to separate "Engine space" and "User space"
+Self-hosted code comes with some caveats one has to be aware of. One of them is ensuring that no parts of the implementation can be interfered with by the user. This means that one has to separate "Engine space" and "User space".
 
-"Engine space" refers to the objects and functions used by the engine. These are not accessible to the user, and can safely be used in implementations. 
+"Engine space" refers objects and functions used by the engine. These are not accessible to the user, and can safely be used in implementations. 
 
-"User space" refers to objects and functions used by the user, think of Array.prototype and its referring functions. These are accessible both by the engine and the user. 
+"User space" refers to objects and functions accessible by the user (for example, `Array.prototype`). These are accessible both by the engine and the user. 
 
-Splitting the object space allows for more control when implementing new features, as it can be useful to have access to "User space" objects and functions. However, care must be taken when using these objects. If not, the implementation can be susceptible to Monkey Patching.
+Splitting the object space allows for more control when implementing new features, as it can be useful to have access to "User space" objects and functions. However, care must be taken when using these objects. Otherwise, the implementation can be susceptible to _monkey patching_.
 
 # **5.2** Monkey Patching
 
-This chapter will be on Monkey Patching. Showcasing what it is and why it occurs, then how to avoid it by using standard JavaScript Objects. 
+Monkey patching occurs when a user overrides a standard EcmaScript function, object or property. An example of this is when the user overrides the `Array.prototype.0` property changes the `set()` function to throw an error. 
 
-Monkey-patching occurs when the user overrides some standard JavaScript function, object or property. Let us use an example where the user overrides the `Array.prototype.0` property where we change the `set()` function to throw an error. 
-
-Run the following code to see Monkey-Patching in action
 ```js
 Object.defineProperty(Array.prototype, '0', {
   set(v) {
-    throw new Error('Monkey-Patched!');
+    throw new Error('Monkey patched');
   }
 });
-a = []
-a[a.length] = 99
-console.log(a[0])
+a = ["a", "b", "c"];
+a[0] = "A";
 ```
 
-When we try to set the property 0 (a.length) in the code above it returns an error because we defined the function set() of property 0 to throw an error.
+When we try to set the property `0` in the code above, it returns an error because we defined the function `set()` for property `0` to throw an error. This behavior is intended, and allows developers to have full control of their EcmaScript environment.
 
-This is an issue when implementing in Self-hosted code as the same objects used in the self hosted code are user patchable. This means if we use the same Array.prototype or Object.prototype in our implementation of `Array.prototype.groupBy` the implementation will have user defined behavior. This is not adherent to the specification and therefore has to be fixed. 
+Monkey patching becomes an issue in self-hosted code, because the objects used in the self-hosted code are user-observable (i.e., the users can overwrite their behavior). This means that if user-observable objects are used, the implementation can contain user-defined behavior. This is not adherent to the specification and therefore has to be fixed. 
 
-In order to avoid Monkey-Patching problems in the implementations we can do one of the following:
+Avoiding monkey patching in self-hosted code can be achieved by:
 
-1. Assign the property safely
+1. manipulating properties safely,
 
-2. Use the standard object that is not user-patchable.
+2. using standard objects that are not user-observable.
 
-Both of these solutions are valid, however they suit different cases. Since the Object (`obj`) created in step 5 is the same as the Object that will return from `groupBy`, using option 2 where no user-patchable properties are included is purposeful.
+Both of these solutions are valid, however, they suit different cases. 
 
-The lists defined within properties of `obj` can be inherited from Array.prototype as long as we assign the properties safely, this can be done with the `DefineDataProperty(obj, key, val)` function. Where the Object to define the property on is obj, the key of the property is key and the value is val. 
+We explain how this manifests in line 5 of the _Array Grouping_ proposal. 
+The first alternative is not applicable because the specification requires that the object returned from `groupBy` does not inherit from `Object.prototype`. Even "mere" use of `{}` would violate the behavior defined in the specification. 
+The second alternative has to be used in this case. Indeed, 
+since the object `obj` created in step 5 is the same as the object that will be returned from `groupBy`, it has to be non-user-observable. 
 
-To create a standard object (`OrdinaryObject`), the function `std_Object_create(null)` can be used. The parameter of this function defines the prototype of the Object created, so we use `null` for a null prototype Object. Using `std_Object_create` allows us to avoid Monkey-patching issues by using a non "User space" object, the "standard" version of the object passed in the first parameter.  
+The lists defined within properties of `obj` can be inherited from `Array.prototype` as long as we assign the properties safely; this can be done with the `DefineDataProperty(obj, key, val)` function, where `obj` is the object to define the property on, `key` is the key of the property, and `val` is the value. 
 
 
-# **Main Task** Avoid Monkey Patching
+In step 7 of the specification, we have to create an `OrdinaryObject` with the Ecma-262 function `OrdinaryObjectCreate(null)`. To implement this the function `std_Object_create(null)` can be used. The parameter of this function defines the prototype of the object created, thus we use `null` for a null prototype object. Using `std_Object_create` allows us to avoid monkey patching by using a non-user-observable object. 
 
-Provided in [Tasks/MainTask.js](./Tasks/MainTask.js) is a "dummy" function. Add this function to `Array.js`, and add the hook inside `Array.cpp`. 
 
-Ensure this "dummy" is not susceptible to Monkey Patching. Remember to assign properties safely, and use standard objects where needed.
+# **Task 5.2.1** Avoiding Monkey Patching
 
-Run the test file [MonkeyTest.js](./Testfiles/MonkeyTest.js), if all the tests pass you have successfully avoided Monkey Patching!
+Provided in [Tasks/MainTask.js](./Tasks/MainTask.js) is a "dummy" function. In order to run it, add this function to `Array.js`, and add the hook inside `Array.cpp`. 
+
+Your task is to ensure this "dummy" function is not susceptible to ,monkey patching. Remember to assign properties safely, and use ordinary objects where needed.
+
+Run the test file [MonkeyTest.js](./Testfiles/MonkeyTest.js): if all the tests pass, you have successfully avoided monkey patching.
 
 ## [<--](../Module%204/Module4.md) [-->](../Module%206/Module6.md) 
   
