@@ -16,9 +16,9 @@ We refer the reader to specific instructions as follows:
 
 - [Building Mozilla Firefox on **macOS**](https://firefox-source-docs.mozilla.org/setup/linux_build.html#building-firefox-on-macos)
 
-The installation will ask what version of Firefox we wish to be building as standard. In this tutorial we will use choice `5: SpiderMonkey JavaScript engine`.
+The installation will ask what version of Firefox we wish to be building as standard. In this tutorial we will use choice `5: SpiderMonkey JavaScript engine`. This choice allows for faster builds during development. As it only builds the new changes between.
 
-It is not needed to configure Mercurial (`hg`) to commit to Mozilla. During installation, answer no (`n`) to this configuration. 
+It is not needed to configure [Mercurial](https://www.mercurial-scm.org/) (`hg`) to commit to Mozilla. During installation, answer no (`n`) to this configuration. As we are not committing the feature developed in this tutorial to Mozilla. 
 
 
 # **1.2** Running SpiderMonkey
@@ -103,26 +103,18 @@ The tasks below introduce how to make small changes to the SpiderMonkey engine, 
 
 One of the simplest ways to change a built-in JavaScript function is to change the return value of that function. Your task is to change the return value of the built-in `Array.at` function to always return the number 42. 
 
-Tip: Take a look in the folder `builtin` located at 
+**Tip:** Take a look in the folder `builtin` located at 
 ```sh
 mozilla_unified/js/src/builtin
 ```
 
-### **Task 1.5.2** More simple changes
+### **Task 1.5.2** Other changes
 
-Change the functionality of some builtin Object in JavaScript. We are mostly familiar with `Array.js`. However, it is highly recommended to see how the other JavaScript Objects are built. 
+So far, we have only looked into the file `Array.js`However, it is highly recommended to see how the other JavaScript objects are defined.
 
-Remember to test your implementation by building the engine!
+Your task is to change the functionality of some built-in object (e.g., ***) in JavaScript.  
 
-
-### **Task 1.5.3** Your own function
-
-Create a function on one of the built-ins of JavaScript. 
-It is irrelevant what this implementation ends up as, the important thing is how to hook self hosted code into the .cpp files.
-
-An example of hooking JavaScript functions into c++ can be seen in `Array.cpp` at line 4571. This then corresponds to the function on line 104 in `Array.cpp`
-
-A good tip for this task is to take a look at how `Array.at` is hooked in the Array.cpp file. 
+Remember to test your implementation by building and running the SpiderMonkey engine.
 
 
 ## [<--](../../README.md) [-->](../Module%202/Module2.md)                 

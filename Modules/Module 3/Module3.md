@@ -61,7 +61,7 @@ Let O be ? ToObject(this value).
 In order to start implementing this line, we need to understand the semantics of the built-in Ecma-262 function `ToObject`. Built-in functions are defined in the specification in prose, and the question is whether or not there is already an implementation of such functions in the engine, and whether they are available to the developer in the current context.
 
 The fastest way to check whether a built-in function is implemented and available is to try to find another Ecma-262 function which utilizes this built-in function.
-The first place to look is usually inside the same object as the one we are working on. In our case, the object is `Array` defined in `Array.js`. There, we see the implementation of `ArrayFilter`, which implements the proposal _Array Filter_. The function `ArrayFilter` utilizes the built-in function `ToObject`: this means that we can look at the implementation of `ArrayFilter` (either by using [Searchfox](https://searchfox.org) or by simply finding it in `Array.js`), which contains the following code corresponding to line 1 in the specification:
+The first place to look is usually inside the same object as the one we are working on. In our case, the object is `Array` defined in `Array.js`. There, we see the implementation of [`ArrayFilter`](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.filter), which implements the proposal _Array Filter_. The function `ArrayFilter` utilizes the built-in function `ToObject`: this means that we can look at the implementation of `ArrayFilter` (either by using [Searchfox](https://searchfox.org) or by simply finding it in `Array.js`), which contains the following code corresponding to line 1 in the specification:
 
 ```js
   /* Step 1. */
@@ -109,10 +109,7 @@ If the array contains no elements, the function should return `"Empty list"` ins
 [].test() // "Empty list"
 ```
 
-TIP: Remember to hook your self hosted function in `Array.cpp`
-
-The Test-file for this task can be found in [Testfiles](./Testfiles/) named `test_task_3_3_1.js`
-
+The test-file for this task can be found in [Testfiles](./Testfiles/test_task_3_3_1.js).
 
 ## **Task 3.3.2** Implementing lines 2-5
 

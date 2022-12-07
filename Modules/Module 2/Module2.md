@@ -1,8 +1,8 @@
-# 2.0 Introduction to EcmaScript
+# **2** Introduction to EcmaScript
 
 The focus of this module is learn how to read Ecma-262, the language specification for JavaScript. 
 
-# 2.1 What is Ecma-262
+# **2.1** What is Ecma-262
 
 EcmaScript is a general purpose programming language defined by the Ecma-262 Language specification. 
 
@@ -12,7 +12,7 @@ A place to view the compliance of the engines to the specification is the [Test2
 
 In this tutorial, we will use a specification at [/Specification/Specification_Array_Grouping.md](/Specification/Specification_Array_Grouping.md) to write the implementation of _Array Grouping_.
 
-# 2.2 The specification of _Array Grouping_
+# **2.2** The specification of _Array Grouping_
 
 In this tutorial, we will be working with an older version of the specification. The official one can be found [here](https://tc39.es/proposal-array-grouping/). The reason for this is it cannot be known whether changes will be made to the specification by the committee in the future. This would make keeping this tutorial up to date difficult if we used the official version.
 
@@ -30,9 +30,8 @@ Everything written in the specification has a definition written somewhere else 
 
 Some functions and parts of the specification are quite difficult to understand, even after having viewed their definition in the specification. This is where the approach of looking at pre-existing code comes in. This can be done by using the powerful tool [_Searchfox_](https://searchfox.org).
 
-## Tasks 2.2:
 
-### **Task 2.2.1.** What does ? mean:
+## **Task 2.2.1.** What does ? mean:
 
 Find out what the `?` in the following line means. 
 ```
@@ -40,13 +39,13 @@ Find out what the `?` in the following line means.
 ```
 After that, explain with your own words why it is needed. 
 
-### **Task 2.2.2.** Definitions of functions:
+## **Task 2.2.2.** Definitions of functions:
 
 Find the definition (explanation) of the function `IsCallable()`. 
 
 NB! It is not required to understand the definition (explanation) of the function. The purpose of this task is to learn how to navigate the Ecma-262 specification. 
 
-# 2.3 Searchfox
+# **2.3** Searchfox
 
 [Searchfox](https://searchfox.org) is a powerful tool to search the codebase of `mozilla_central`. It enables a developer to look through the existing codebase much easier than manually navigating through files. This allows for fast location of code that might use the same definition in Ecma-262.
 
@@ -58,16 +57,13 @@ There are usually parts of the specification that are quite similar when they ar
 
 Viewing the codebase of SpiderMonkey this way is a lot more efficient than using IDE's search, as all the functions of SpiderMonkey are indexed and searchable in Searchfox. 
 
-## Tasks 2.4:
 
-### **2.4.1** Find the implementation:
+## **Task 2.4.1** Find the implementation:
 
 In the task [2.2.2](#task-222-definitions-of-functions) you were supposed to find the definition of `IsCallable` in Ecma-262. 
 Your task is to use Searchfox to find out what the implementation of the Ecma-262 function `IsCallable` is called in SpiderMonkey.
 
-# **2.5** Main task
-
-## **Task 2.5.1**
+## **Task 2.4.2**
 
 After this module, the implementation will start. It is strongly recommended to understand each part of the specification by this time. Therefore, to get a deeper understanding, go through each line in the specification of `Array.prototype.GroupBy`, and write a short paragraph about how each line should function in the implementation. The length of each paragraph should be related to the complexity of the line. 
 
@@ -99,6 +95,10 @@ That is, the function `groupBy` groups elements of an array to `key` -> `[v_1,` 
 {5:["hello", "world"], 1:["!"] }
 ```
 This is the behavior defined in the [specification](../../Specification/Specification_Array_Grouping.md) of the proposal. 
+
+This tutorial will be using only the specification provided. As the official specification is subject to change until the proposal is fully finalized. The official specification of the proposal: [_Array Grouping_](https://tc39.es/proposal-array-grouping/).
+
+Since the version of the spec this tutorial is using was written. The functions of _Array Grouping_ have been renamed to `Array.prototype.group` and `Array.prototype.groupToMap`.
 
 ## **Task 2.5.2**
 

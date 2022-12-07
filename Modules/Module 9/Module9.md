@@ -10,7 +10,7 @@ Remove the code added for debugging/testing in the environment. Especially `Test
 
 # **9.2** Cleaning the implementation
 
-If you are working in Visual Studio Code, it is highly recommended to download JS Linter, this will show trailing newlines and other beatify errors. 
+If you are working in Visual Studio Code, it is highly recommended to download JS Linter, this will show trailing newlines and other beautify errors. 
 
 The implementors of new proposals usually add a comment to each line of their implementation. This comment will contain what line of the specification this expression/code-line should and does adhere to. As can be seen in `Array.js`, some implementors choose to add the entire line of the specification, while others just provide the line number / letter. Historically only the number/letter was added, however new implementations should have the entire line of the specification as a comment. 
 
