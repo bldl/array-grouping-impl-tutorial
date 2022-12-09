@@ -92,7 +92,7 @@ Here `map` is the object apply function call to,
 `key` is a key to either get or set data on,
 and `value` is a value to associate with `key`.
 
-## **Task 7.2.2** Implementing GroupByMap
+## **Task 7.5.1** Implementing GroupByMap
 
 Your task is to implement `Array.prototype.groupByMap`.
 Make sure that monkey patching is avoided. 
