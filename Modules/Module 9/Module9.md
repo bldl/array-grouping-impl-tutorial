@@ -2,17 +2,19 @@
 
 The proposal is implemented and tests have been created. The implementation of _Array grouping_ is now close to being done. 
 
-In order for our code to be up to standards and easily readable in 10 years, we have to ensure it adheres to the "standard" set by Mozilla and Test262.  
+In order for our code to be up to standards and easily understandable by future developers, we have to ensure it adheres to the "standard" set by Mozilla and Test262.  
 
 # **9.2** Removing debug code
 
-Remove the code added for debugging/testing in the environment. Especially `Test` functions created HAVE to be removed!
+Since we are close to finished with the implementation, debugging code is no longer needed. Remove any debugging code added during development
 
 # **9.2** Cleaning the implementation
 
-If you are working in Visual Studio Code, it is highly recommended to download JS Linter, this will show trailing newlines and other beautify errors. 
+It is highly recommended to download a beautify extension for your IDE. This will allow for trailing newlines and other flaws. 
 
-The implementors of new proposals usually add a comment to each line of their implementation. This comment will contain what line of the specification this expression/code-line should and does adhere to. As can be seen in `Array.js`, some implementors choose to add the entire line of the specification, while others just provide the line number / letter. Historically only the number/letter was added, however new implementations should have the entire line of the specification as a comment. 
+If you are working in Visual Studio Code, it is highly recommended to download the [Beautify](https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify) extension is highly recommended. 
+
+The implementors of new proposals have to add a comment to each part of their implementation. This comment describes what line of the specification this expression/code-line implements. As can be seen in `Array.js`, some implementors choose to add the entire line of the specification, while others just provide the line number / letter. Historically only the number/letter was added, however new implementations should have the entire line of the specification as a comment. 
 
 Example of specification comment taken from `ArrayToReversed` in `Array.js`:
 ```js
@@ -20,7 +22,7 @@ Example of specification comment taken from `ArrayToReversed` in `Array.js`:
   var len = ToLength(O.length);
 ```
 
-If the implementor has strayed from the original specification, meaning simplified or changed the implementation based on their respective environment, this has to be addressed. In a comment above the strayed line write why the implementation was changed from the specification. Be short and concise. 
+If the implementor has strayed from the original specification, meaning simplified or changed the implementation based on their respective engine, this has to be addressed. In a comment above the strayed line write why the implementation was changed from the specification. Be short and concise. 
 
 Example of straying from the implementation taken from `ArrayToSorted` in `Array.js`:
 ```js
@@ -35,7 +37,7 @@ Example of straying from the implementation taken from `ArrayToSorted` in `Array
 
 ## **Task 9.2.1** Cleaning the implementation
 
-Clean up the implementation. Check the code syntax with a linter or beautifier. Add comments with the line of the specification implemented, and any deviation in the implementation. 
+Clean up the implementation. Check the code syntax with a code beautifier. Add comments with the line of the specification implemented, and any deviation in the implementation. 
 
 # **9.3** Cleaning up Test262 tests and adhering to the contributor rules. 
 
@@ -81,6 +83,7 @@ Explain the lines given here:
 ## **Task 9.3.1** Cleaning the tests
 
 Add the header to all the tests implemented for the proposal _Array grouping_. 
+
 
 ## [<--](../Module%208/Module8.md) 
   
