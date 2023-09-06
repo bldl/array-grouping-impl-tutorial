@@ -4,6 +4,8 @@
 This is a tutorial on how to implement a [TC39](https://tc39.es/) proposal [_Array Grouping_](https://github.com/tc39/proposal-array-grouping) in the [SpiderMonkey](https://spidermonkey.dev/) JavaScript engine. We explain here how to read the [proposal specification](https://tc39.es/proposal-array-grouping/) and create the implementation which is compliant to the specification. 
 The implementation will be mostly written in [self-hosted JavaScript](http://udn.realityripple.com/docs/Mozilla/Projects/SpiderMonkey/Internals/self-hosting), with a tiny bit of C++.
 
+**This tutorial presents an implementation of the proposal as of October 2021. Though somewhat significant changes have been made to the proposal since then, the ideas and concepts presented in the current tutorial are still valid, and can be applied to implement other JavaScript proposals which deal with (simple) API changes.**
+
 
 # What you will learn
 
@@ -28,7 +30,7 @@ This tutorial will give an introduction on how to:
 
 # For teachers
 
-This tutorial can be taught as a university course. 
+This tutorial can be taught as a university course. More details coming soon.
 
 # Authors
 
